@@ -1,5 +1,4 @@
 ## Creative Borrowing or We Are Hack and have been Stealing Code for Years
-=======
 
 #### Synopsis
 
