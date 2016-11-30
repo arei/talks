@@ -8,7 +8,7 @@
 * JSConf Last Call
   - December 2015
   - By Todd Gandee & Glen R. Goodwin
-  - [Recording](https://www.youtube.com/watch?v=6-1-bmYdKKQ&index=10&list=PL37ZVnwpeshEV5FASM9f8K29kCrHiKIwO)
+  - [Recording (YouTube)](https://www.youtube.com/watch?v=6-1-bmYdKKQ&index=10&list=PL37ZVnwpeshEV5FASM9f8K29kCrHiKIwO)
 
 #### Slides
 

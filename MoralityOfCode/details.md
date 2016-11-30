@@ -15,8 +15,8 @@ The act of writing code seems pretty innocuous. But what if it isn't? What if th
 
 #### Slides
 
-* In Powerpoint Format: [MoralityOfCode.pptx](https://github.com/arei/talks/MoralityOfCode/MoralityOfCode.pptx)
-* In Adobe PDF Format: [MoralityOfCode.pdf](https://github.com/arei/talks/MoralityOfCode/MoralityOfCode.pdf)
+* In Powerpoint Format: [MoralityOfCode.pptx](https://github.com/arei/talks/blob/master/MoralityOfCode/MoralityOfCode.pptx)
+* In Adobe PDF Format: [MoralityOfCode.pdf](https://github.com/arei/talks/blob/master/MoralityOfCode/MoralityOfCode.pdf)
 
 #### License
 
