@@ -9,7 +9,7 @@ The act of writing code seems pretty innocuous. But what if it isn't? What if th
 * NodeInteractive North America 2016
   - November 30, 2016 @ 10:50am (CST)
   - By Glen R. Goodwin
-  - Recording coming soon.
+  - [Recording at YouTube](https://youtu.be/qckwm2FBsFE)
 
 
 #### Slides
