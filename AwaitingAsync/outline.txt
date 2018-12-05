@@ -378,6 +378,10 @@ whatever the promise resolves with, is what the return/assignment uses.
 
 AWAIT GOTCHAS
 
+
+
+
+
 Some interesting things to keep in mind though.
 
 [SLIDE: xyz]
@@ -469,30 +473,6 @@ and await on that.
 
 	map([0,1,2,3,4,5,6,7,8,9]);
 	// returns [ 0, 1, 4, 9, 16, 25, 36, 49, 64, 81 ]
-
-BUT YOU STILL WRITE PROMISES
-
-[SLIDE: xyz]
-
-So that's the basics of using async/await.
-
-The thing I love about async/await is that it makes your code much more readable.
-but like callbacks before it and promises after that,
-it does and it doesnt.
-
-A key thing with async/await is that it doesnt save you from writing callbacks
-in many case you still keep passing functions around.
-
-It doesn't save you from writing promises
-since you need to return a promise to await on.
-So you end up writing a lot of promises, but almost no then() methods.
-
-but what it does do is free you from
-nesting callbacks and chaining promises
-and lots of strung together code that is really hard to follow.
-and that my friends is money in the bank.
-
-Some last things to know before you jump into async/await...
 
 [SLIDE: xyz]
 
