@@ -12,8 +12,7 @@ Async/Await in your code today.
 * CharmCityJS
   - December 5, 2018 @ 7:00pm (EST)
   - By Glen R. Goodwin
-  - Record TBA
-
+  - No recording made
 
 #### Slides
 
@@ -22,12 +21,15 @@ Async/Await in your code today.
 
 #### Example code
 
+A [handful of examples](https://github.com/arei/talks/raw/master/AwaitingAsync/examples)
+of using Callbacks, Promises, and async/await, some of which made it into the slides and
+the talk.
 
 #### License
 
 MIT License
 
-Copyright (c) 2016 Glen R. Goodwin
+Copyright (c) 2018 Glen R. Goodwin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
