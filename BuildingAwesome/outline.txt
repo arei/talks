@@ -821,27 +821,27 @@ STEP 2: Write a controller
 			}
 		}
 
-		return new Promise((resolve,reject)=>{
-			try {
-				path = Path.resolve(".")
-				FS.readdir(path,async (err,files)=>{
-					if (err) return await response.writeError(500,err);
+return new Promise((resolve,reject)=>{
+	try {
+		path = Path.resolve(".")
+		FS.readdir(path,async (err,files)=>{
+			if (err) return await response.writeError(500,err);
 
-					files = files.filter((filename)=>{
-						return filename.endsWith(".jpg");
-					});
-					files = files.map((filename)=>{
-						return Path.basename(filename,".jpg");
-					});
-					await response.writeJSON(files);
+			files = files.filter((filename)=>{
+				return filename.endsWith(".jpg");
+			});
+			files = files.map((filename)=>{
+				return Path.basename(filename,".jpg");
+			});
+			await response.writeJSON(files);
 
-					resolve();
-				});
-			}
-			catch (ex) {
-				return reject(ex);
-			}
+			resolve();
 		});
+	}
+	catch (ex) {
+		return reject(ex);
+	}
+});
 
 	And then we will implement our getSpecificKitten() method.
 
@@ -933,46 +933,46 @@ STEP 3: Write the Server
 
 	Now, we add our server code:
 
-		let server = new AwesomeServer();
-		server.addHTTPServer({
-			hostname: config.server.hostname,
-			port: config.server.port
-		});
-		server.route("*","*",(path,request,response)=>{
-			Log.access("Request from "+request.origin+" to "+request.url.href+".");
-		});
-		server.route("*","/kittens|/kittens/*","./KittenController.js");
-		server.start();
-		Log.debug("Server started.");
+let server = new AwesomeServer();
+server.addHTTPServer({
+	hostname: config.server.hostname,
+	port: config.server.port
+});
+server.route("*","*",(path,request,response)=>{
+	Log.access("Request from "+request.origin+" to "+request.url.href+".");
+});
+server.route("*","/kittens|/kittens/*","./KittenController.js");
+server.start();
+Log.debug("Server started.");
 
-	Here we are adding two routes:
-	The first one matches every single request that comes in
-	and the handler writes a log message for each.
-	The second route matches /kittens or /kittens/*
-	and routes that to our controller.
+Here we are adding two routes:
+The first one matches every single request that comes in
+and the handler writes a log message for each.
+The second route matches /kittens or /kittens/*
+and routes that to our controller.
 
-	Also, our code has two tricky bits to be aware of...
-	Both Log.start() and server.start() are asyncronous methods
-	and return a promise...
-	But we'd like them to act syncronously here.
-	async/await to the rescue.
+Also, our code has two tricky bits to be aware of...
+Both Log.start() and server.start() are asyncronous methods
+and return a promise...
+But we'd like them to act syncronously here.
+async/await to the rescue.
 
-	So we can just stick an await command
-	in from of Log.start() and server.start()
+So we can just stick an await command
+in from of Log.start() and server.start()
 
-	For those of you whom might remember my talk
-	about async/await
-	a few months back
-	you may recall that I told you
-	that you can only use an await
-	inside of an async function.
-	and currently the top level
-	of your code, where we are now,
-	is not an async function.
+For those of you whom might remember my talk
+about async/await
+a few months back
+you may recall that I told you
+that you can only use an await
+inside of an async function.
+and currently the top level
+of your code, where we are now,
+is not an async function.
 
-	So here's a little magic to get
-	around that sticking point:
-	we just wrap everything in an async IIFE!
+So here's a little magic to get
+around that sticking point:
+we just wrap everything in an async IIFE!
 
 		(async ()=>{
 			// startup logging

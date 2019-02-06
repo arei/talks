@@ -1,5 +1,4 @@
 /* Our base, which is also our local server configuration */
-
 {
 	"server": {
 		"scheme": "http",
@@ -10,7 +9,6 @@
 }
 
 /* our production environment settings */
-
 [env:target=production]
 {
 	"server": {
