@@ -9,27 +9,31 @@ three are used to build out an API server.
 
 Hello, My name is Glen.
 
-You may know me from such other famous movies as
+You may know me from such other famous talks as
 
 [slide]
 
-Debugging while Drunk: The Silent Killer
+Debugging while Drunk:
+The Silent Killer
 
 and
 
 [slide]
 
-Writing For Loops: The Silent Killer
+For Loops:
+The Silent Killer
 
 And, of course, who could forget,
 
 [slide]
 
-Using React: The Silent Killer.
+Using React:
+The Silent Killer.
 
 But today I want to talk to YOU
 about how YOU TOO can be
 
+[pause]
 [slide]
 
 AWESOME!
@@ -51,9 +55,9 @@ config files like you've always dreamed about
 
 and finally
 AwesomeServer
-HTTP/HTTPS/HTTP2 API/Web Server
+your one stop HTTP/HTTPS/HTTP2 Server
 
-So today I will show you
+Today I will show you
 each of these three libraries
 and how you can use them
 to build a
@@ -69,93 +73,54 @@ I wanted to mention a little bit
 about my motivations in writing
 these three libraries (and more to come).
 
-[slide]
+[blank slide]
 
-One of the great things about
-the nodejs eccosystem
-is the diversity of it.
-Unfortunately, this is also the
-worst thing about the nodejs eccosystem.
+The packages you choose to use
+when building nodejs projects,
+or any software projects for that matter,
+are libraries you need to trust
+maintained by people you need to trust.
 
-Choosing the right library to
-integrate with your code
-is not only difficult,
-it can be downright exhausting.
+When you install a package like express
 
 [slide]
 
-There is no clear way to
-choose the right library.
-Do you do so via
-Word of mouth?
-Longevity?
-github stars?
-Number of issues? (which seems really counter-intuitive)
+you are actually installing 48 separate packages.
 
 [slide]
 
-None of these approaches is really adequate
+48 separate licenses that you need to review
+with your legal team
+48 separate maintainers you have to
+work with when things go awry.
+48 separate problems you have to
+solve when its time to debug.
 
-Really, choosing the right library
-comes down to a question of trust.
+So when I sat down to write the Awesome libraries
+My goals were very clear:
 
-[slide]
+Build a set of tools
+that are engineered to work together;
+that are free from external dependencies;
+that are maintained by a single organization;
+that are consistently licensed by a single licensor.
 
-Do you trust the maintainers to maintain it?
-Do you trust them to support it?
-Do you trust them to ensure it?
-Do you trust them to keep it relevent?
-
-These are hard questions to answer.
-
-[slide]
-
-So lets say yes, you trust the maintainers of express
-so you npm install it and are good to go.
-
-Except when you install express,
-you also install 47 other packages.
-and now you have to ask yourself
-
-Do you trust that the maintainers of express
-trust those 47 other maintainers?
-
-Do you trust those 48 other packages?
-
-[slide]
-
-So when I set down to write AwesomeServer
-and AwesomeLog and AwesomeConfig
-and all the rest of the Awesome libraries
-I intentionally did so to address
-these issues.
-
-I wanted to build libraries that had
-A single maintainer
-A single support system
-a single point of contact
-
-I intentionally minimized
-often even removed entirely
-any external dependency.
-
-And I wanted to make the licensing simple,
-with only one licensor (Awesome Engineering)
-and as free and open as possible.
-
+Essentially
 I set out to create
 A single point of trust.
 
 [slide]
 
-So when you use Awesome products,
-your only question is
-do I trust one company.
-do I trust Awesome Engineering.
+And it is my hope
+that when you have to make a choice
+about your libraries
+we will hav earned you patronage,
+we will have earned your trust.
 
 [pause]
 
-With that said, lets take a look at our libraries.
+So, with that said,
+lets take a look at our libraries.
 
 [slide]
 
@@ -183,6 +148,8 @@ We start, obviously, by installing it.
 
 [slide]
 
+Once installed, we can use AwesomeLog right away.
+
 In our application,
 as close the entry point
 of your application as possible
@@ -191,7 +158,9 @@ of your application as possible
 	Log.init();
 	Log.start();
 
-That's it.  AwesomeLog will spin itself up and start handling any Log calls you make, like this:
+That's it.  AwesomeLog will spin itself up
+and start handling any Log calls you make,
+like this:
 
 [slide]
 
@@ -199,20 +168,39 @@ That's it.  AwesomeLog will spin itself up and start handling any Log calls you 
 
 Once you've started AwesomeLog you can use
 it any where in your application*
-with needing to initialize or start it again.
+without needing to initialize or start it again.
+You just require it,
+and use it:
+
+	const Log = require("@awesomeeng/awesome-log");
+	Log.debug("My god, it's full of bugs!");
+
+Because AwesomeLog was initialized
+at the top of your application,
+reinitializing it in each module,
+or passing the Log object around
+is unnecessary.
 
 [slide]
 
-Now, if you want to do more with it,
-you can pass a configuration object into
-Log.init().
+I mentioned also that AwesomeLog
+is highly configurable.
 
-For example, by default AwesomeLog has 5 logging levels:
+When you initialize AwesomeLog,
+you may pass an optional configuration object
+to change AwesomeLog from its defaults.
+
+For example, by default AwesomeLog has five logging levels:
 Access, Error, Warn, Info and Debug.
 
-[slide]
 
 Say we wanted to add a new level: SILLY
+
+[slide]
+
+We just tell AwesomeLog during initialization
+our new configuration,
+and AwesomeLog handles the rest.
 
 	Log.init({
 		levels: "access,error,warn,info,debug,silly"
@@ -255,7 +243,7 @@ Log.init({
 
 [slide]
 
-File Writer
+Log to a File
 
 	Log.init({
 	    writers: [{
@@ -270,7 +258,6 @@ File Writer
 	        type: "file",
 	        formatter: "json",
 	        options: {
-	            housekeeping: "2 hours",
 	            filename: "logs/MyLogs.{YYYYMMDD}.log"
 	        }
 	    }],
@@ -287,10 +274,7 @@ Or add your own formats or writers:
 		writers: [{
 			name: "MyCustomLogs",
 			type: "my-custom-writer",
-			formatter: "my-custom-formatter",
-			options: {
-				colorize: true
-			}
+			formatter: "my-custom-formatter"
 		}],
 	});
 
@@ -327,9 +311,13 @@ AwesomeConfig.
 
 [slide]
 
-AwesomeConfig provides a unified, transparent configuration object
-to your application based on configuration files or objects that you define.
-It includes support for conditional configuration
+AwesomeConfig provides a unified,
+transparent configuration object
+to your application
+based on configuration files or objects that you define.
+It includes support for
+Inline or File based configuration,
+conditional configuration sections,
 variables to reference one part of your configuration from another;
 and lots more.
 
@@ -341,6 +329,7 @@ we start by installing it.
 
 	npm install @awesomeeng/awesome-config
 
+After installed
 Setting up config happens in four steps.
 Like AwesomeLog, we recommend you do this
 as close to the top of your application as possible.
@@ -387,15 +376,21 @@ some of you might have noticed...
 
 [slide]
 
-First, when calling methods like init() or add() or start()
+First, when calling methods
+like init() or add() or start()
 we using the config() method signature.
 
-But when accessing the config data, we use the config
-object dot notation.
+[slide]
 
-This is a little trick to prevent our config functions
-from being overwritten by our config data
-and it allows AwesomeConfig to have zero reserved words.
+But when accessing the config data,
+we use the config object dot notation.
+
+This is a little trick
+to prevent our config functions
+from being overwritten
+by our config data
+and it allows AwesomeConfig
+to have zero reserved words.
 
 [slide]
 
@@ -407,9 +402,12 @@ add() can no longer be called.
 
 [slide]
 
-Third, you can call add() with either a JavaScript Object
-or a filename.  If a filename is used, AwesomeConfig will
-read that file and if it is a valid config use it.
+Third, you can call add()
+with either a JavaScript Object
+or a filename.
+If a filename is used,
+AwesomeConfig will read that file
+and if it is a valid config use it.
 
 [slide]
 
@@ -417,13 +415,15 @@ Fourth, you can call add() as many times as you want,
 adding multiple config objects/files.
 
 When you call start(),
-AwesomeConfig will merge all the configuration together
-overwriting earlier config values with latter ones.
+AwesomeConfig will merge all the configurations together
+into a unified configuration object
+overwriting earlier config values
+with latter ones.
 
 [slide]
 
 Finally, we used JSON in all of the examples,
-and thats fine if you like that sort of thing.
+and that's fine if you like that sort of thing.
 but AwesomeConfig really works best when you use
 the AwesomeConfig Notation.
 
@@ -471,6 +471,10 @@ but with a few added bonuses:
 
 [slide]
 
+	JSON and key/values together
+
+[slide]
+
 	Variables
 
 	Variables allow you to reference
@@ -481,7 +485,7 @@ but with a few added bonuses:
 
 	Conditions
 
-	Conditions preceed a section of configuration
+	Conditions precede a section of configuration
 	and that configuration is only applied
 	if the conditions evaluate true.
 
@@ -494,13 +498,13 @@ There are a lot of other features to AwesomeConfig
 
 	Add configuration from files, directories, as JSON, or as a plain javascript objects;
 	Uses JSON notation or our custom notation that supports mixing JSON style config and key/value style config;
-	Globally accessable config without the need to pass config objects around;
+	Globally accessible config without the need to pass config objects around;
 	Configuration is exposed as a plain JavaScript object for easy usage;
-	Support for namespaced instances to isolate usage as needed;
+	Support for namespace instances to isolate usage as needed;
 	Configuration is immutable once started;
 	Configuration Variables allow cross referencing other parts of your configuration;
 	Configuration Conditions allow you to toggle on/off different parts of your configuration based on external values like hostname, OS, or environment variables.
-	Configuration Plcaeholders to force users to provide key configuration values.
+	Configuration Placeholders to force users to provide key configuration values.
 	No reserved words.
 
 [slide]
@@ -521,7 +525,8 @@ I'd like to introduce you to AwesomeServer.
 AwesomeServer is an easy to setup
 HTTP or
 HTTPS or
-HTTP/2 server
+HTTP/2
+server
 allowing you to provide flexible
 routing and controllers
 for responding to incoming requests
@@ -537,6 +542,7 @@ we start by installing it.
 
 [slide]
 
+After we install
 Setting up AwesomeServer happens in five steps.
 
 [slide]
@@ -588,9 +594,10 @@ Routing
 [slide]
 
 The first key part of setup is
-Adding a Server
+Adding Servers
 
 You add a server to an instance of AwesomeServer.
+
 You may add multiple servers to the same instance
 and each will handle the same routing,
 just from different entry points.
@@ -609,7 +616,7 @@ write your own customer server.
 [slide]
 
 You add a server with the addServer() method,
-but there are shortcut for HTTP, HTTPS and HTTP2.
+but there are shortcuts for HTTP, HTTPS and HTTP2.
 addHTTPServer()
 addHTTPSServer()
 addHTTP2Server()
@@ -690,14 +697,15 @@ or a directory name to a collection of Controller classes
 	server.route("*","/blah","./controllers");
 
 Controllers provide
-a structure way to organize your code
-around a specific endpoint
+a structured way to organize your code
+around a specific endpoints
 and are the recommended router approach.
 
 The filename and directory versions of server.route()
-make it really easy to define routes
+make it really easy to define controllers
 and tie them to your code without
-getting bogged down in giant mess.
+getting bogged down in giant mess
+of code spagetti.
 
 [slide]
 
@@ -784,7 +792,7 @@ STEP 2: Write a controller
 		GET /kittens - returns a list of all kitten ids.
 		GET /kittens/<id> - returns the kitten's picture.
 
-	So lets add some logic to our get to separate the two:
+	So lets add some logic to our get() to separate the two:
 
 		const AwesomeServer = require("@awesomeeng/awesome-server");
 
@@ -796,7 +804,6 @@ STEP 2: Write a controller
 		}
 
 	Now, lets implement the getKittensId() function
-	I'm going to cut and paste this to save a little time.
 
 	The key point is that we are going to
 	get a list of all the .jpg files on the disk
@@ -878,6 +885,26 @@ STEP 2: Write a controller
 			return response.serve(200,"image/jpeg",Path.resolve("./"+id+".jpg"));
 		};
 
+	You might have noticed that
+	we are doing some things with the response object
+	that isnt quite standard:
+	In AwesomeServer each request and response is wrapped
+	in a special Request or Response wrapper
+	that adds a collection of shortcuts
+	to help dealing with request and response.
+
+	Request gets shortcuts for
+	getting key request data
+	and shortcuts for reading POSTed data.
+
+	Response gets shortcuts for
+	writing and serving content.
+	In getSpecificKitten()
+	for example,
+	we use response.serve()
+	to serve a file from disk,
+	straight to the response.
+
 	To round it all out we need to export our class:
 
 		module.exports = KittenController;
@@ -886,7 +913,7 @@ STEP 3: Write the Server
 
 	Next we are going to write the Server code.
 
-	We start by requring our three libraries:
+	We start by requiring our three libraries:
 
 		const AwesomeServer = require("@awesomeeng/awesome-server");
 		const Log = require("@awesomeeng/awesome-log");
@@ -919,7 +946,13 @@ STEP 3: Write the Server
 		server.start();
 		Log.debug("Server started.");
 
-	This introduces two tricky bits...
+	Here we are adding two routes:
+	The first one matches every single request that comes in
+	and the handler writes a log message for each.
+	The second route matches /kittens or /kittens/*
+	and routes that to our controller.
+
+	Also, our code has two tricky bits to be aware of...
 	Both Log.start() and server.start() are asyncronous methods
 	and return a promise...
 	But we'd like them to act syncronously here.
@@ -1000,6 +1033,25 @@ STEP 4: Configuration
 				"port": 80
 			}
 		}
+
+	The config file describes a base configuration
+	and a conditional configuration
+	tied to the TARGET environment variable.
+
+	If TARGET equals PRODUCTION
+	our configuration will be
+	a merge of the base configuration
+	and the conditional configuration.
+
+	If Target is anything else
+	our configuration will be
+	only the base configuration.
+
+	Also, just a quick notice of the use
+	of the configuration Variables
+	for server.url.
+	Depending on our TARGET again
+	the variable will resolve differently.
 
 STEP 5: A little more logging
 
