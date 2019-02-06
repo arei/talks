@@ -1,0 +1,1062 @@
+An introduction to using three new libraries from Awesome Engineering
+to rapidly build any enterprise ready API Server. Specifically will
+touch upon AwesomeServer, AwesomeLog, and AwesomeConfig, and how the
+three are used to build out an API server.
+
+-----------------------
+
+[Brian Poeshen Slide]
+
+Hello, My name is Glen.
+
+You may know me from such other famous movies as
+
+[slide]
+
+Debugging while Drunk: The Silent Killer
+
+and
+
+[slide]
+
+Writing For Loops: The Silent Killer
+
+And, of course, who could forget,
+
+[slide]
+
+Using React: The Silent Killer.
+
+But today I want to talk to YOU
+about how YOU TOO can be
+
+[slide]
+
+AWESOME!
+
+Today I'm going to introduce you to
+three new(ish) libraries
+that you can use
+to build a really awesome API Server.
+
+[slide]
+
+AwesomeLog
+for easy, smart logging.
+
+[slide]
+
+AwesomeConfig
+config files like you've always dreamed about
+
+and finally
+AwesomeServer
+HTTP/HTTPS/HTTP2 API/Web Server
+
+So today I will show you
+each of these three libraries
+and how you can use them
+to build a
+quick
+easy
+stable
+API Server
+
+[slide]
+
+But before I jump into the code
+I wanted to mention a little bit
+about my motivations in writing
+these three libraries (and more to come).
+
+[slide]
+
+One of the great things about
+the nodejs eccosystem
+is the diversity of it.
+Unfortunately, this is also the
+worst thing about the nodejs eccosystem.
+
+Choosing the right library to
+integrate with your code
+is not only difficult,
+it can be downright exhausting.
+
+[slide]
+
+There is no clear way to
+choose the right library.
+Do you do so via
+Word of mouth?
+Longevity?
+github stars?
+Number of issues? (which seems really counter-intuitive)
+
+[slide]
+
+None of these approaches is really adequate
+
+Really, choosing the right library
+comes down to a question of trust.
+
+[slide]
+
+Do you trust the maintainers to maintain it?
+Do you trust them to support it?
+Do you trust them to ensure it?
+Do you trust them to keep it relevent?
+
+These are hard questions to answer.
+
+[slide]
+
+So lets say yes, you trust the maintainers of express
+so you npm install it and are good to go.
+
+Except when you install express,
+you also install 47 other packages.
+and now you have to ask yourself
+
+Do you trust that the maintainers of express
+trust those 47 other maintainers?
+
+Do you trust those 48 other packages?
+
+[slide]
+
+So when I set down to write AwesomeServer
+and AwesomeLog and AwesomeConfig
+and all the rest of the Awesome libraries
+I intentionally did so to address
+these issues.
+
+I wanted to build libraries that had
+A single maintainer
+A single support system
+a single point of contact
+
+I intentionally minimized
+often even removed entirely
+any external dependency.
+
+And I wanted to make the licensing simple,
+with only one licensor (Awesome Engineering)
+and as free and open as possible.
+
+I set out to create
+A single point of trust.
+
+[slide]
+
+So when you use Awesome products,
+your only question is
+do I trust one company.
+do I trust Awesome Engineering.
+
+[pause]
+
+With that said, lets take a look at our libraries.
+
+[slide]
+
+We begin with AwesomeLog.
+
+[slide]
+
+AwesomeLog provides a basic
+out of the box
+logging solution that is
+ready to go with
+zero configuration
+but also allows for a
+highly configurable
+logging solution
+to handle your logging right.
+
+But really, let me just show you how to use it.
+
+[slide]
+
+We start, obviously, by installing it.
+
+	npm install @awesomeeng/awesome-log
+
+[slide]
+
+In our application,
+as close the entry point
+of your application as possible
+
+	const Log = require("@awesomeeng/awesome-log");
+	Log.init();
+	Log.start();
+
+That's it.  AwesomeLog will spin itself up and start handling any Log calls you make, like this:
+
+[slide]
+
+	Log.info("Hello there world.");
+
+Once you've started AwesomeLog you can use
+it any where in your application*
+with needing to initialize or start it again.
+
+[slide]
+
+Now, if you want to do more with it,
+you can pass a configuration object into
+Log.init().
+
+For example, by default AwesomeLog has 5 logging levels:
+Access, Error, Warn, Info and Debug.
+
+[slide]
+
+Say we wanted to add a new level: SILLY
+
+	Log.init({
+		levels: "access,error,warn,info,debug,silly"
+	});
+	Log.start();
+
+Now we can do
+
+	Log.silly("this is an ex-parrot");
+
+Anywhere we like.
+
+There is a lot more you can do with AwesomeLog with just a little configuration...
+
+[slide]
+
+CSV or JSON output
+
+Log.init({
+	writers: [{
+		name: "MyConsoleWriter",
+		type: "console",
+		formatter: "csv",
+		options: {
+			colorize: true
+		}
+	}],
+});
+
+Log.init({
+	writers: [{
+		name: "MyConsoleWriter",
+		type: "console",
+		formatter: "json",
+		options: {
+			colorize: true
+		}
+	}],
+});
+
+[slide]
+
+File Writer
+
+	Log.init({
+	    writers: [{
+	        name: "MyConsoleWriter",
+	        type: "console",
+	        formatter: "default",
+	        options: {
+	            colorize: true
+	        }
+	    },{
+	        name: "MyFileWriter",
+	        type: "file",
+	        formatter: "json",
+	        options: {
+	            housekeeping: "2 hours",
+	            filename: "logs/MyLogs.{YYYYMMDD}.log"
+	        }
+	    }],
+	});
+
+[slide]
+
+Or add your own formats or writers:
+
+	Log.defineFormatter("my-custom-formatter","./My-Custom-Formatter.js");
+	Log.defineWriter("my-custom-writer","./My-Custom-Writer.js");
+
+	Log.init({
+		writers: [{
+			name: "MyCustomLogs",
+			type: "my-custom-writer",
+			formatter: "my-custom-formatter",
+			options: {
+				colorize: true
+			}
+		}],
+	});
+
+[slide]
+
+And lots more...
+
+	Ready to go with zero initial configuration;
+	Configure and Start once, Use Everywhere;
+	Support for clean nested AwesomeLog usage;
+	Customizable Log Levels;
+	Configurable log entry field contents;
+	Built-In Formatters: Default, JSON, JS, or CSV;
+	Or add your own log formatters;
+	Console and File writers;
+	or add your own custom log writer;
+	Colorized Console Logging;
+	Log History;
+	Pause/Resume;
+	SubProcess Logging;
+
+[slide]
+
+But it's best if you just read the documentation:
+
+	npm repo @awesomeeng/awesome-log
+
+[pause]
+
+[slide]
+
+Lets move on to our next library
+AwesomeConfig.
+
+[slide]
+
+AwesomeConfig provides a unified, transparent configuration object
+to your application based on configuration files or objects that you define.
+It includes support for conditional configuration
+variables to reference one part of your configuration from another;
+and lots more.
+
+Once again, let me just show you.
+
+[slide]
+
+we start by installing it.
+
+	npm install @awesomeeng/awesome-config
+
+Setting up config happens in four steps.
+Like AwesomeLog, we recommend you do this
+as close to the top of your application as possible.
+
+[slide]
+
+1: Require it.
+
+	const config = require("@awesomeeng/awesome-config");
+
+[slide]
+
+2: Initialize it.
+
+	config().init();
+
+[slide]
+
+3: Add zero or more configuration objects or files:
+
+	config().add("./AwesomeConfig1.json");
+	config().add({
+		user: {
+			name: "Bob"
+		}
+	});
+
+[slide]
+
+4: Once all our config is added, we start AwesomeConfig.
+
+	config().start();
+
+[slide]
+
+AwesomeConfig is now up and running and you can access
+your configuration using the config object.
+
+	console.log("Hello there "+config.user.name);
+	console.log("Greetings from "+config.user.location);
+
+So a few key things to note that
+some of you might have noticed...
+
+[slide]
+
+First, when calling methods like init() or add() or start()
+we using the config() method signature.
+
+But when accessing the config data, we use the config
+object dot notation.
+
+This is a little trick to prevent our config functions
+from being overwritten by our config data
+and it allows AwesomeConfig to have zero reserved words.
+
+[slide]
+
+Second, config is completely immutable.
+the only way to change configuration
+is via the add() method.
+And once start() is called,
+add() can no longer be called.
+
+[slide]
+
+Third, you can call add() with either a JavaScript Object
+or a filename.  If a filename is used, AwesomeConfig will
+read that file and if it is a valid config use it.
+
+[slide]
+
+Fourth, you can call add() as many times as you want,
+adding multiple config objects/files.
+
+When you call start(),
+AwesomeConfig will merge all the configuration together
+overwriting earlier config values with latter ones.
+
+[slide]
+
+Finally, we used JSON in all of the examples,
+and thats fine if you like that sort of thing.
+but AwesomeConfig really works best when you use
+the AwesomeConfig Notation.
+
+AwesomeConfig notation is almost identical to JSON,
+but with a few added bonuses:
+
+	/* API Server configuration */
+	{
+		"server": {
+			"scheme": "http",
+			"hostname": "localhost",
+			"port": 1234,
+			"cert": null,
+			"key": null,
+			"url": "${server.scheme}://${server.hostname}:${server.port}"
+		}
+	}
+
+	[env:target=local]
+	server.port: 8080
+
+	[env:target=test]
+	server.port: 80
+
+	[env:target=production]
+	server: {
+		"hostname": "0.0.0.0",
+		"port": 443,
+		"scheme": "https",
+		"cert": "./MyCertificate.pub",
+		"key": "./MyCertificate.pri"
+	}
+
+[slide]
+
+	Comments
+
+[slide]
+
+	JSON Blocks
+
+[slide]
+
+	key/value pairs
+
+[slide]
+
+	Variables
+
+	Variables allow you to reference
+	one part of your configuration
+	from another part of your configuration.
+
+[slide]
+
+	Conditions
+
+	Conditions preceed a section of configuration
+	and that configuration is only applied
+	if the conditions evaluate true.
+
+	Variables and conditions when used
+	together can be really powerful.
+
+[slide]
+
+There are a lot of other features to AwesomeConfig
+
+	Add configuration from files, directories, as JSON, or as a plain javascript objects;
+	Uses JSON notation or our custom notation that supports mixing JSON style config and key/value style config;
+	Globally accessable config without the need to pass config objects around;
+	Configuration is exposed as a plain JavaScript object for easy usage;
+	Support for namespaced instances to isolate usage as needed;
+	Configuration is immutable once started;
+	Configuration Variables allow cross referencing other parts of your configuration;
+	Configuration Conditions allow you to toggle on/off different parts of your configuration based on external values like hostname, OS, or environment variables.
+	Configuration Plcaeholders to force users to provide key configuration values.
+	No reserved words.
+
+[slide]
+
+But like before it's best if you just read the documentation:
+
+	npm repo @awesomeeng/awesome-config
+
+[pause]
+
+[slide]
+
+Last but not least,
+I'd like to introduce you to AwesomeServer.
+
+[slide]
+
+AwesomeServer is an easy to setup
+HTTP or
+HTTPS or
+HTTP/2 server
+allowing you to provide flexible
+routing and controllers
+for responding to incoming requests
+in a consistent, repeatable, performant fashion.
+
+[slide]
+
+Once again, let me just show you.
+
+we start by installing it.
+
+	npm install @awesomeeng/awesome-server
+
+[slide]
+
+Setting up AwesomeServer happens in five steps.
+
+[slide]
+
+1: Require it.
+
+	const AwesomeServer = require("@awesomeeng/awesome-server");
+
+[slide]
+
+2: Instantiate it.
+
+	let server = new AwesomeServer();
+
+[slide]
+
+3: Add Servers
+
+	server.addHTTPServer({
+		hostname: "localhost",
+		port: 8080
+	});
+
+[slide]
+
+4: Add routes
+
+	server.route("GET","/test",(path,request,response)=>{
+		return response.writeHTML("Hello World!");
+	});
+
+[slide]
+
+5: Go!
+
+	server.start();
+
+AwesomeServer is now up and running on port 8080 and
+serving requests:
+
+	curl http://localhost:8080/test
+
+
+There are two key parts to setting up AwesomeServer
+Adding Servers
+And
+Routing
+
+[slide]
+
+The first key part of setup is
+Adding a Server
+
+You add a server to an instance of AwesomeServer.
+You may add multiple servers to the same instance
+and each will handle the same routing,
+just from different entry points.
+Thus you can have both an HTTP
+and an HTTPS served by the same instance
+handling the same requests.
+
+AwesomeServer supports
+HTTP
+HTTPS
+and HTTP2 servers.
+Additionally you could,
+if you wanted to,
+write your own customer server.
+
+[slide]
+
+You add a server with the addServer() method,
+but there are shortcut for HTTP, HTTPS and HTTP2.
+addHTTPServer()
+addHTTPSServer()
+addHTTP2Server()
+
+[slide]
+
+Each of these shortcuts takes a configuration object
+which describes the hostname and port to bind to.
+For HTTPS and HTTP2 server you would also
+need to include your public and private
+certificates for the underlying TLS security.
+
+[slide]
+
+The second key part of setup is adding routes.
+
+The simplest form of adding a route
+is the route() command.
+
+	server.route(method,path,handler);
+
+the route command takes three arguments:
+
+[slide]
+
+The METHOD
+which corresponds to the HTTP Method
+of the incoming request.
+GET, HEAD, POST, etc.
+
+You may also specify the "*" character
+to match ALL methods.
+
+[slide]
+
+The PATH
+describes how to match the incoming requests
+path to this specific route.
+
+Paths can either be
+Exact
+Starts With
+Ends With
+Contains
+RegEx
+or an OR EXPRESSION separated by PIPE "|" characters
+
+[slide]
+
+The HANDLER can be
+
+a function with the following signature
+
+	server.route("GET","/blah",(path,request,response) => {
+		...
+	});
+
+[slide]
+
+a Controller Class
+
+	server.route("*","/blah",(class MyController extends AwesomeServer.AbstractContoller {
+		get(path,request,response) {
+			... handle GET request ...
+		}
+	}));
+
+[slide]
+
+A filename to a Controller Class
+
+	server.route("*","/blah","./MyController.js");
+
+[slide]
+
+or a directory name to a collection of Controller classes
+
+	server.route("*","/blah","./controllers");
+
+Controllers provide
+a structure way to organize your code
+around a specific endpoint
+and are the recommended router approach.
+
+The filename and directory versions of server.route()
+make it really easy to define routes
+and tie them to your code without
+getting bogged down in giant mess.
+
+[slide]
+
+There are a lot of other features to AwesomeServer
+
+	Easy to use.
+	HTTP support.
+	HTTPS support.
+	HTTP/2 support including push routing for preloading.
+	Or mix and match all three types of servers.
+	Basic routing to channel HTTP Method X along path Y into predefined functions.
+	Advanced routing using Controllers that takes your routing to the next level.
+	Controllers from classes, files, or whole directory trees.
+	Support for serving static files or whole directories to specific routes.
+	Easy built-in redirects.
+	Built around native promises and ready for async/await.
+	Integrated with AwesomeLog for easy logging if you want it.
+	Add your own custom servers beyond HTTP, HTTPS, or HTTP/2.
+
+[slide]
+
+But like before it's best if you just read the documentation:
+
+	npm repo @awesomeeng/awesome-server
+
+[pause]
+
+[slide]
+
+So for our final part of tonight,
+lets put all three libraries together.
+
+[slide]
+
+For this example we are going to write a quick API Server
+that will server up images of kittens.
+It will have two endpoints:
+
+	GET /kittens - return a list of all kitten ids
+	GET /kittens/<id> - return a specific kitten image.
+
+Additionally, we will log each request we get out.
+
+Finally, we will provide both a local environment configuration
+and a production environment configuration.
+
+[slide]
+
+I'm going to visually walk through this
+on the slides here
+then I'll switch over to the code
+and run it all for you
+to see it in action.
+
+[slide]
+
+STEP 1: Install our libraries:
+
+	npm install @awesomeeng/awesome-server
+	npm install @awesomeeng/awesome-log
+	npm install @awesomeeng/awesome-config
+
+[slide]
+
+STEP 2: Write a controller
+
+	We are going to use a Controller in AwesomeServer
+	to handle our incoming request.
+
+	So lets write that first.
+
+	We start out simple enough
+
+		const AwesomeServer = require("@awesomeeng/awesome-server");
+
+		class KittenController extends AwesomeServer.AbstractController {
+			get(path,request,response) {
+			}
+		}
+
+	We have two types of get requests we want to service
+	with this controller.
+
+		GET /kittens - returns a list of all kitten ids.
+		GET /kittens/<id> - returns the kitten's picture.
+
+	So lets add some logic to our get to separate the two:
+
+		const AwesomeServer = require("@awesomeeng/awesome-server");
+
+		class KittenController extends AwesomeServer.AbstractController {
+			get(path,request,response) {
+				if (path==="") return getKittenIds(path,request,response);
+				else return getSpecificKitten(path,request,response);
+			}
+		}
+
+	Now, lets implement the getKittensId() function
+	I'm going to cut and paste this to save a little time.
+
+	The key point is that we are going to
+	get a list of all the .jpg files on the disk
+	trim the .jpg off those names,
+	and return that as a json array of our ids.
+
+		const Path = require("path");
+		const FS = require("fs");
+
+		const AwesomeServer = require("@awesomeeng/awesome-server");
+
+		class KittenController extends AwesomeServer.AbstractController {
+			get(path,request,response) {
+				if (path==="") return getKittenIds(path,request,response);
+				else return getSpecificKitten(path,request,response);
+			}
+		}
+
+		return new Promise((resolve,reject)=>{
+			try {
+				path = Path.resolve(".")
+				FS.readdir(path,async (err,files)=>{
+					if (err) return await response.writeError(500,err);
+
+					files = files.filter((filename)=>{
+						return filename.endsWith(".jpg");
+					});
+					files = files.map((filename)=>{
+						return Path.basename(filename,".jpg");
+					});
+					await response.writeJSON(files);
+
+					resolve();
+				});
+			}
+			catch (ex) {
+				return reject(ex);
+			}
+		});
+
+	And then we will implement our getSpecificKitten() method.
+
+		const Path = require("path");
+		const FS = require("fs");
+
+		const AwesomeServer = require("@awesomeeng/awesome-server");
+
+		class KittenController extends AwesomeServer.AbstractController {
+			get(path,request,response) {
+				if (path==="") return getKittenIds(path,request,response);
+				else return getSpecificKitten(path,request,response);
+			}
+		}
+
+		return new Promise((resolve,reject)=>{
+			try {
+				path = Path.resolve(".")
+				FS.readdir(path,async (err,files)=>{
+					if (err) return await response.writeError(500,err);
+
+					files = files.filter((filename)=>{
+						return filename.endsWith(".jpg");
+					});
+					files = files.map((filename)=>{
+						return Path.basename(filename,".jpg");
+					});
+					await response.writeJSON(files);
+
+					resolve();
+				});
+			}
+			catch (ex) {
+				return reject(ex);
+			}
+		});
+
+		const getSpecificKitten = function getKitten(id,request,response) {
+			Log.debug("Received request to return specific Kitten "+id+".");
+			return response.serve(200,"image/jpeg",Path.resolve("./"+id+".jpg"));
+		};
+
+	To round it all out we need to export our class:
+
+		module.exports = KittenController;
+
+STEP 3: Write the Server
+
+	Next we are going to write the Server code.
+
+	We start by requring our three libraries:
+
+		const AwesomeServer = require("@awesomeeng/awesome-server");
+		const Log = require("@awesomeeng/awesome-log");
+		const config = require("@awesomeeng/awesome-config");
+
+	Next, lets setup and start our logging:
+
+		Log.init();
+		Log.start();
+		Log.debug("Log started.");
+
+	And also our configuration stuff:
+
+		config().init();
+		config().add("./config.json");
+		config().start();
+		Log.debug("Config started.");
+
+	Now, we add our server code:
+
+		let server = new AwesomeServer();
+		server.addHTTPServer({
+			hostname: config.server.hostname,
+			port: config.server.port
+		});
+		server.route("*","*",(path,request,response)=>{
+			Log.access("Request from "+request.origin+" to "+request.url.href+".");
+		});
+		server.route("*","/kittens|/kittens/*","./KittenController.js");
+		server.start();
+		Log.debug("Server started.");
+
+	This introduces two tricky bits...
+	Both Log.start() and server.start() are asyncronous methods
+	and return a promise...
+	But we'd like them to act syncronously here.
+	async/await to the rescue.
+
+	So we can just stick an await command
+	in from of Log.start() and server.start()
+
+	For those of you whom might remember my talk
+	about async/await
+	a few months back
+	you may recall that I told you
+	that you can only use an await
+	inside of an async function.
+	and currently the top level
+	of your code, where we are now,
+	is not an async function.
+
+	So here's a little magic to get
+	around that sticking point:
+	we just wrap everything in an async IIFE!
+
+		(async ()=>{
+			// startup logging
+			Log.init();
+			await Log.start();
+			Log.debug("Log started.");
+
+			// startup config
+			config().init();
+			config().add("./config.json");
+			await config().start();
+			Log.debug("Config started.");
+
+			// startup server
+			let server = new AwesomeServer();
+			server.addHTTPServer({
+				hostname: config.server.hostname,
+				port: config.server.port
+			});
+			server.route("*","*",(path,request,response)=>{
+				Log.access("Request from "+request.origin+" to "+request.url.href+".");
+			});
+			server.route("*","/kittens|/kittens/*","./KittenController.js");
+			await server.start();
+			Log.debug("Server started.");
+		})();
+
+	Finally, we can add a little Log message to
+	the end and let us know its all running.
+
+		// Log out our success
+		Log.debug("Kittens running at "+config.server.url);
+
+STEP 4: Configuration
+
+	We are using a configuration file
+	which we called config.json
+	so let's go ahead and create that.
+
+		/* Our base, which is also our local server configuration */
+
+		{
+			"server": {
+				"scheme": "http",
+				"hostname": "localhost",
+				"port": 8080,
+				"url": "${server.scheme}://${server.hostname}:${server.port}"
+			}
+		}
+
+		/* our production environment settings */
+
+		[env:target=production]
+		{
+			"server": {
+				"hostname": "0.0.0.0",
+				"port": 80
+			}
+		}
+
+STEP 5: A little more logging
+
+	Let's go back to our controller
+	and sprinkle some additional logging
+	statements in there:
+
+		const Log = require("@awesomeeng/awesome-log");
+
+		...
+
+		Log.debug("Received request to return Kitten Ids");
+
+		...
+
+		Log.debug("Received request to return specific Kitten "+id+".");
+
+STEP 6: Run
+
+	Now we are ready to run it
+	and see how we did.
+
+	node Server.js
+
+	curl http://localhost:8080/kittens
+
+	http://localhost:8080/kittens/asd35t244tv35sdf
+
+	STOP
+
+	set target=production
+
+	node Server.js
+
+	curl http://localhost:80/kittens
+
+	http://localhost:80/kittens/h45y356uhjdsg4325
+
+THE END
+
+So that's it for tonight.
+Time to go get beer.
+
+If you are interested,
+You can check out all the
+Awesome Engineering libraries
+at https://github.com/awesomeeng
+or individually with
+npm repo awesome-log
+npm repo awesome-config
+npm repo awesome-server
+
+Also, I have a handful of nodejs stickers
+to give out to people.
+Find me at the bar
+and tell me if you are going
+to try any of the stuff I showed tonight
+out and you can have one!
+
+Thank you.

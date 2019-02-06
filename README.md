@@ -5,3 +5,4 @@ Below are all of the conference talks I have given so far.  Follow the links for
 * [Creative Borrowing or We Are Hacks and have been Stealing Code for Years (w/ Todd Gandee)](https://github.com/arei/talks/blob/master/CreativeBorrowing/details.md)
 * [The Morality of Code](https://github.com/arei/talks/blob/master/MoralityOfCode/details.md)
 * [Why are you "Awaiting" to use Async - An introduction to async/await](https://github.com/arei/talks/blob/master/AwaitingAsync/details.md)
+* [Building an Awesome API Server - Introducing AwesomeLog, AwesomeConfig and AwesomeServer](https://github.com/arei/talks/blob/master/BuildingAwesome/details.md)
