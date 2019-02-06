@@ -114,7 +114,7 @@ A single point of trust.
 And it is my hope
 that when you have to make a choice
 about your libraries
-we will hav earned you patronage,
+we will have earned you patronage,
 we will have earned your trust.
 
 [pause]
@@ -151,7 +151,7 @@ We start, obviously, by installing it.
 Once installed, we can use AwesomeLog right away.
 
 In our application,
-as close the entry point
+as close to the entry point
 of your application as possible
 
 	const Log = require("@awesomeeng/awesome-log");
@@ -192,7 +192,6 @@ to change AwesomeLog from its defaults.
 
 For example, by default AwesomeLog has five logging levels:
 Access, Error, Warn, Info and Debug.
-
 
 Say we wanted to add a new level: SILLY
 
