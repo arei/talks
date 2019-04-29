@@ -12,15 +12,12 @@ three are used to build out an API server.
 * CharmCityJS
   - February 6, 2019 @ 7:00pm (EDT)
   - By Glen R. Goodwin
-  - Record TBA
+  - No Recording Available
 
 #### Slides
 
 * In Powerpoint Format: [BuildingAwesome.pptx](https://github.com/arei/talks/raw/master/BuildingAwesome/BuildingAwesome.pptx)
 * In Adobe PDF Format: [BuildingAwesome.pdf](https://github.com/arei/talks/raw/master/BuildingAwesome/BuildingAwesome.pdf)
-
-#### Example code
-
 
 #### License
 
