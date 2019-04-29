@@ -1,0 +1,29 @@
+:host {
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.stars {
+	flex: 0 0 auto;
+	display: flex;
+}
+
+.label {
+	flex: 1 0 auto;
+	margin-left: 15px;
+}
+
+.stars > * {
+	margin-right: 5px;
+	display: inline-block;
+}
+
+.stars > .star > .empty {
+	flex: 0 0 auto;
+	display: inherit;
+}
+
+.stars > .star > .filled {
+	flex: 0 0 auto;
+	display: none;
+}

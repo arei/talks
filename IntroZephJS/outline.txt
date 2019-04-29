@@ -1,3 +1,309 @@
+Introducing to ZephJS
+
 An introduction to the ZephJS library. ZephJS is an extremely easy to use, simple to understand, ultra-light framework for defining and using Web Components. ZephJS is perfect for people writing component libraries, teams building applications or sites that just require a few custom components, or projects building whole applications that do not want the gigantic weight of a modern JavaScript browser framework. ZephJS simplifies the process of defining custom Web Components into a highly readable declarative structure that uses standard JavaScript, standard HTML markup, and standard CSS styling. And ZephJS weighs in at less than 20k minified!
 
 -----------------------
+
+INTRO
+
+Hello everyone,
+
+I'm Glen
+I'm here to tell you about
+what may be the single greatest achievement
+in Web Browser Technology.
+Ever.
+
+EVER.
+
+It's called ZephJS and it's going to change your life.
+
+[ZephJS Logo Slide]
+
+But, before I can tell you about ZephJS,
+I need to tell you about Web Components.
+
+[Web Components Logo]
+
+And I know that a few months ago,
+We had Shane come up here
+and talk about writing web components.
+So instead of giving you all that again.
+I'm going to summarize exactly what he said.
+
+1). Web Components are AWESOME.
+
+[AWESOME slide]
+
+2). Glen is an incredibly handsome man.
+
+[Brian Poeshn Slide]
+
+Not sure why he said that last bit
+but it is absolutely what happened.
+
+[pause]
+
+Seriously though,
+
+[Web Component Standards]
+
+Web Components are
+a collection of Browser API standards
+that make writing
+custom HTML tags possible.
+This means if I want to create <my-awesome-button>
+it is now possible with web components.
+
+Specifically,
+A Web Component,
+
+[Custom Elements API Slide]
+is a defined,
+
+[ShadowDOM slide]
+encapsulated,
+
+[HTML slide]
+custom HTML tag.
+
+A web component,
+done right,
+behaves just like any other
+HTML tag you are used to using
+
+Any time you can envision
+a custom
+repeatable
+display and behavior
+for a web page
+you should be reaching
+for a web component.
+
+This includes when you build
+a complex web application
+out of a collection of nested web components
+or whether you just want
+to offer a feature that
+HTML does not currently have.
+
+Now,
+Like I said,
+Shane already covered how to use
+the defined web component standards
+and did a great job of that
+but honestly,
+you need to forget a lot of that.
+
+The author's of the web component standards
+never really intended for everyone
+to have to understand how ShadowDOM works
+or how CSS flows into or out of a Web Component.
+
+Instead, they goal of Web Components
+was to provide a set of low-level APIs
+that libraries,
+Web Component Helper Libraries,
+could wrap up into a
+higher order system.
+
+And that's where ZephJS fits in
+
+ZephJS is a Web Component helper library,
+meaning that it
+Helps your write Web Components.
+
+If you are familiar with the space,
+polymer/lit-element are good comparisons.
+
+Except ZephJS isnt the same.
+With ZephJS you just focus
+on the component...
+No need to monkey about with the ShadowDOM
+Or rendering templates
+Or the like.
+Just write your component
+with declarative language
+using standard HTML,
+CSS,
+and JavaScript.
+Nothing Fancy.
+
+And then once your component is written
+use ZephJS' built in bundler
+to create a shipable
+definition of your component
+or component library
+bundled into a single file.
+
+ZephJS provides everything a developer needs
+to define and bundle a web component
+in simple,
+readable
+langauge
+with almost no overhead...
+In fact, ZephJS, at last look
+was less then 21k.
+
+[pause]
+
+So let us look at how ZephJS works...
+
+at the heart of ZephJS is the
+`ZephComponents.define()` method.
+
+To this you provide two things:
+
+ - The tag name if the componnet you wish to define
+ - and a definition function in which you describe the component.
+
+The tag name must be
+ - at least three characters long
+ - and must have at least one dash character in it.
+ Otherwise call it whatever you want.
+
+The definition function is a standard javascript function
+(or arrow function)
+in which you call one or more definition methods.
+Definition methods describe various aspects of your component.
+For example, the `html()` definition method describes
+the internal HTML of the component.
+The `attribute()` definition method describes
+an attribute of the component.
+
+There are currently 18 different definition methods
+you can use to describe various aspects of your component:
+Some of the more interesting ones are
+
+html()
+css()
+asset()
+
+These methods are used to describe content, styling, and external resource for your component.
+
+attribute()
+property()
+
+These methods define an attribute or property of the component.
+
+bind()
+bindAt()
+
+Used to propagate changes to an attribute, property, or content of the component to some other part of the component.  For example, we can bind an attribute of the component to a property of the component, and when the attribute changes, ZephJS will automatically update the property at the same time. Bindings are an incredibly useful feature of ZephJS.
+
+onInit()
+onCreate()
+onAdd()
+onRemove()
+onAdopt()
+onAttribute()
+onProperty()
+
+These allow the developer of the component to tap into one or more of the lifecylce events a component goes through from initialization to creation to addition/removal/adoption to attribute/property changes.
+
+onEvent()
+onEventAt()
+
+These definition methods allow you to bind an event handler to the component or some part of the component to be fired when the event occurs. ZephjS ensures when these events do happen, the event handler knows about the component and its content.
+
+[pause]
+
+Given the tag name and the definition, ZephJS executes the definition and builds what is called a Component Context, which describes the component completely. It then registers the given name with a custom Component Class that uses the context to setup the component.
+
+That sounds really complicated, lets just say some magic happens and ZephJS turns your name and definition into a registered custom element and you are good to go.
+
+Alright, that's all the slides, lets get into it and build something...
+
+For our very contrived example, let us build a Star Rating component.
+You know the type of thing like on netflix.
+Where you click on a star and that's how much you like
+that movie or tv show or whatever.
+
+We will keep it pretty standard.
+Our <rating-stars> component will allow the user to rate the associated item from 0 to 5 stars, no fractional stars allowed.
+Clicking a higher star indicates a higher rating,
+clicking a lower star indicates a lower rating.
+We want the component to show both the number of stars
+and the text of what is being rated..
+
+So let's get at it..
+
+First, lets setup our project which we will call rating-stars.
+
+`npm init`
+
+Next, we install ZephJS globally.  This gives us access to the ZephJS command line tool which will serve to help work with Zeph..
+
+`npm install -g zephjs`
+
+Once ZephJS is installed we can use the ZephJS CLI (called "zeph") to scaffold our componnet:
+
+`zeph new rating-stars`
+
+This will create scaffolded rating.starts.js, .html and .css files,  as well as ensure that zeph.full.js and zeph.min.js and a default index.html exists for our project. Lets look at each of these quickly...
+
+zeph.full.js is the full unminified version of ZephJS, useful for debugging and reference.
+
+zeph.min.js is the minified version of ZephJS, weighing in at under 21k.
+
+index.html will be created if no index.html exists and serves as an example of how to include a zephjs component.
+
+rating-stars.js will serve as our component definition.
+
+rating-stars.html provides the html content of our component.  In ZephJS you can provide the html inline in the definition, or as an external file.  The external file approach is cleaner, so that is what is recommended.
+
+rating-stars.css provides the css styling of our component.  In ZephJS you can provide the css inline in the definition, or as an external file.  The external file approach is cleaner, so that is what is recommended.
+
+Okay, so we have our scaffolded component created, we can go ahead and try it out.  ZephJS provides us a command line command to easily serve and test our components:
+
+`zeph serve`
+
+Ths will start a HTTP Serve on port 400, which we can hit in our browser to take a look at our page:
+
+But, currently there is nothing to actually lok at on the page, but with our inspector we can see our <rating-stars> element and it internal content and styles.
+
+So lets go add something to see.
+
+First, we are going to build out our index.html. Let us say we are going to rate the characters from Bob's Burgers:
+
+Bob Belcher
+Linda Belcher
+Tina Belcher
+Gene Belcher
+Louise Belcher
+
+So let us build out our index html to allow each to be rated and add a basic heading. Each of our rating-stars elements is going to have a separate label and value. The value will indicate a positive whole number from 0 to 5 to indicate what the rating currently is. We will also leave a few values off entirely to show how default values work:
+
+WE can refresh our page and see, well nothing,  because our rating-stars component has no content, but if we use the inspector we can see the html for each of our rating-stars and make sure all is well.
+
+Let us define some basics of our component so we can start seeing something.
+
+First, we create some content for our rating-stars.html and let our component start to take shape.
+We will create a place for our label, and a place for our stars, and five stars.
+
+Next, we need to define a little bit more about our component, so lets add our attributes to our component definition.
+
+While we are here, lets also create our star image... In the interest of saving time I'm just going to copy it from another example:
+
+`copy ..\..\..\..\Awesome\code\zephjs\examples\RatingStars\*.png`
+
+We can also tell our component about these image assets with our asset() definition method. Here we assocated the .filled and .empty class with the appropraite image..
+
+We can refresh in our browser and see our HTML updated accordingly.
+
+And we are starting to see the shape of our component.  Let's add a little styling to make things look pretty.  We style our component in the rating-stars.css file...
+
+
+
+
+
+
+
+
+
+
+
+
+USING ZEPHJS
+
+LIVE CODING
