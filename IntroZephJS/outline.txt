@@ -16,7 +16,8 @@ Ever.
 
 EVER.
 
-It's called ZephJS and it's going to change your life.
+It's called ZephJS
+and it's going to change your life.
 
 [ZephJS Logo Slide]
 
@@ -49,29 +50,45 @@ Seriously though,
 
 [Web Component Standards]
 
-Web Components are
+Shane told us all about
+how Web Components are
 a collection of Browser API standards
 that make writing
 custom HTML tags possible.
-This means if I want to create <my-awesome-button>
-it is now possible with web components.
 
-Specifically,
+[my awesome button slide]
+
+This means if I want to create <my-awesome-button>
+it is possible with web components.
+
+As Shane showed us
 A Web Component,
 
 [Custom Elements API Slide]
-is a defined,
+uses the Custom Elements API
+to register a Component Class
+That will be instantiated whenever
+the given tag name is used.
 
 [ShadowDOM slide]
-encapsulated,
+When the Component class
+is instantiated
+We attach a ShadowDOM root to it
+which allows us to insert
+content and style
+into the element
+that is isolated
+from the rest of the DOM.
 
-[HTML slide]
-custom HTML tag.
+[Web Component graphic slide]
 
-A web component,
-done right,
-behaves just like any other
-HTML tag you are used to using
+This provides us with
+a customized
+encapsulated
+HTML element
+for use anywhere in our web document.
+
+[Complex Web Component Example]
 
 Any time you can envision
 a custom
@@ -88,20 +105,29 @@ or whether you just want
 to offer a feature that
 HTML does not currently have.
 
+[Picture of Shane?]
+
 Now,
 Like I said,
 Shane already covered how to use
 the defined web component standards
 and did a great job of that
+
+[X'd Out Picture of Shane]
+
 but honestly,
 you need to forget a lot of what he said.
+
+[Low Level Diagram]
 
 The author's of the web component standards
 never really intended for everyone
 to have to understand how ShadowDOM works
 or how CSS flows into or out of a Web Component.
 
-Instead, they goal of Web Components
+[ Higher Order Diagram]
+
+Instead, the goal of Web Components
 was to provide a set of low-level APIs
 that libraries,
 could wrap up into a
@@ -109,21 +135,33 @@ higher order system.
 
 And that's where ZephJS fits in
 
+[ZephJS Logo]
+
 ZephJS is a Web Component helper library,
 meaning that it
 Helps your write Web Components.
 
 If you are familiar with the space,
-polymer/lit-element are good comparisons.
+the lit-element project
+is a good comparison.
+
+[ZephJS Blurb]
 
 Except ZephJS isnt the same.
 With ZephJS you just focus
 on the component...
 No need to monkey about with the ShadowDOM
+or the custom elements api
 Or render templates
-Or the like.
-Just write your component
-with declarative language
+or virtual DOMs
+or any of the hundereds of things
+modern frameworks saddle us with.
+
+[Example ZephJS Component]
+
+With ZephJS
+You just write your component
+with declarative syntax
 using standard HTML,
 standard CSS,
 and standard JavaScript.
@@ -132,41 +170,42 @@ Nothing Fancy.
 ZephJS provides everything a developer needs
 to define a web component
 in simple,
-readable
-language
+readable language
 with almost no overhead.
 At last look,
 ZephJS minified
 was less than 21k.
 
-And when you are ready
-to distribute
-use ZephJS' built in bundler
-to create a shippable
-component library
-bundled into a single file.
-
 [pause]
 
 So let us look at how ZephJS works...
+
+[Example ZephJS Component - Define highlighted]
 
 at the heart of ZephJS is the
 `ZephComponents.define()` method.
 
 To this you provide two things:
 
- - The tag name if the component you wish to define
- - and a definition function in which you describe the component.
+[Example ZephJS Component - Name Highlighted]
+
+The tag name if the component you wish to define
 
 The tag name must be
- - at least three characters long
- - and must have at least one dash character in it.
- Otherwise call it whatever you want.
+- at least three characters long
+- and must have at least one dash character in it.
+Otherwise call it whatever you want.
+
+[Example ZephJS Component - Definition Highlighted]
+
+and a definition function in which you describe the component.
 
 The definition function
 is a standard javascript function
 (or arrow function)
 in which you call one or more definition methods.
+
+[Example ZephJS Component - Definition METHODS Highlighted]
 
 Definition methods describe various aspects of your component.
 For example, the `html()` definition method describes
@@ -177,114 +216,128 @@ an attribute of the component.
 There are currently eighteen different definition methods
 Some of the more interesting ones are
 
+[html()]
+
 html()
 
-	The html() definition method
-	is used to indicate the internal content
-	of the component.
+The html() definition method
+is used to indicate the internal content
+of the component.
 
-	It can be a string of inline HTML
-	or it can be a url or relative path reference
-	to an external file.
+It can be a string of inline HTML
+or it can be a url or relative path reference
+to an external file.
+
+[css()]
 
 css()
 
-	the css() definition method
-	is used to indicate the styling
-	for the component and the internal content.
+the css() definition method
+is used to indicate the styling
+for the component and the internal content.
 
-	It can be a string of inline CSS
-	or it can be a url or relative path reference
-	to an external file.
+It can be a string of inline CSS
+or it can be a url or relative path reference
+to an external file.
+
+[attribute()]
 
 attribute()
 
-	The attribute() definition method
-	is used to indicate that the component has
-	an attribute.
+The attribute() definition method
+is used to indicate that the component has
+an attribute.
+
+[property()]
 
 property()
 
-	The property() definition method
-	is used to indicate that the componnet has
-	a exposed javascript property.
+The property() definition method
+is used to indicate that the componnet has
+a exposed javascript property.
+
+[bind() and bindAt()]
 
 bind()
 bindAt()
 
-	ZephJS has no templating language
-	and no template parser
-	or complicated psuedo-html interpolation.
+ZephJS has no templating language
+and no template parser
+or complicated psuedo-html interpolation.
 
-	Instead, if you want some part
-	of an element or internal content element
-	to change, you have to do it yourself.
+Instead, if you want some part
+of an element or internal content element
+to change, you have to do it yourself.
 
-	ZephJS, of course,
-	makes this super easy to do
-	with bindings.
+ZephJS, of course,
+makes this super easy to do
+with bindings.
 
-	Binding lets you identify
-	a source element,
-	a source type,
-	a target element,
-	and a target type.
+Binding lets you identify
+a source element,
+a source type,
+a target element,
+and a target type.
 
-	When the source item of the source element changes
-	The changed value
-	is copied to the target type
-	on the target element.
+When the source item of the source element changes
+The changed value
+is copied to the target type
+on the target element.
 
-	For example you can say
+For example you can say
 
-	if the "value" attribute
-	of the custom element
-	changes,
-	copy it to the content of
-	the second DIV tag
-	in the internal content
+if the "value" attribute
+of the custom element
+changes,
+copy it to the content of
+the second DIV tag
+in the internal content
 
-	`bind("@value","div:nth-child(2)","$")`
+`bind("@value","div:nth-child(2)","$")`
 
-	Or
+Or
 
-	if the "value" property
-	of the text input field with the component
-	changes,
-	copy it to the "data-value" attribute
-	of the element.
+if the "value" property
+of the text input field with the component
+changes,
+copy it to the "data-value" attribute
+of the element.
 
-	`bindAt("input[type=text]",".value",".","@data-value")`
+`bindAt("input[type=text]",".value",".","@data-value")`
 
-	The difference between bind() and bindAt()
-	is that bind() assumes the source element
-	is the current element.
-	whereas bindAt()
-	allows you to specify the source element.
+The difference between bind() and bindAt()
+is that bind() assumes the source element
+is the current element.
+whereas bindAt()
+allows you to specify the source element.
 
-	bind() is a really useful concept in ZephJS
-	and saves you a ton of typing.
+bind() is a really useful concept in ZephJS
+and saves you a ton of typing.
+
+[onEvent() and onEventAt()]
 
 onEvent()
 onEventAt()
 
-	The onEvent() and onEventAt() definition methods
-	are used to associate an event listener
-	with the element
-	or an element within the internal content.
+The onEvent() and onEventAt() definition methods
+are used to associate an event listener
+with the element
+or an element within the internal content.
 
-	onEvent() adds the listener
-	to the element.
-	It takes the eventType as the first argument
-	and the listener function as the second.
+onEvent() adds the listener
+to the element.
+It takes the eventType as the first argument
+and the listener function as the second.
 
-	onEventAt() adds the listener
-	to some element within the internal content.
-	It takes a CSS Query Selector as the first argument.
-	the eventType as the second argument.
-	and the listener function as the third argument.
+onEventAt() adds the listener
+to some element within the internal content.
+It takes a CSS Query Selector as the first argument.
+the eventType as the second argument.
+and the listener function as the third argument.
 
 [pause]
+
+[ZephJS Documentation Screenshot]
 
 There are a few other definition methods
 for doing things like
@@ -292,6 +345,8 @@ handling lifecycle events
 or inheriting from another ZephJS component.
 Everything is carefully enumerated
 in the documentation.
+
+[ZephJS Workflow]
 
 So once you have defined your component,
 ZephJS executes the definition function
@@ -305,6 +360,8 @@ that when instantiated
 uses the Component Context
 to setup the component.
 
+[Magic Happens Here]
+
 That sounds really complicated,
 lets just say some magic happens
 and ZephJS turns your name and definition
@@ -312,6 +369,8 @@ into a registered custom element
 and you are good to go.
 
 Alright, that's all the slides, lets get into it and build something...
+
+[Example Rating Stars Screen Shot]
 
 For our very contrived example, let us build a Star Rating component.
 You know the type of thing like on netflix.
@@ -328,487 +387,503 @@ clicking a lower star indicates a lower rating.
 We want the component to show both the number of stars
 and the text of what is being rated...
 
+[ LVIE CODING ]
+
 So let's get at it...
 
 SETUP
 
-	First, we setup our project
-	which we will call rating-stars.
+First, we setup our project
+which we will call rating-stars.
 
-	`npm init`
+`npm init`
 
 INSTALL
 
-	Next, we install ZephJS globally.
-	This gives us access to
-	the ZephJS command line tool
-	which will help work with Zeph...
+Next, we install ZephJS globally.
+This gives us access to
+the ZephJS command line tool
+which will help work with Zeph...
 
-	`npm install -g zephjs`
+`npm install -g zephjs`
 
 SCAFFOLD
 
-	Once ZephJS is installed
-	we can use the ZephJS CLI
-	(called "zeph")
-	to scaffold our component:
+Once ZephJS is installed
+we can use the ZephJS CLI
+(called "zeph")
+to scaffold our component:
 
-	`zeph new rating-stars`
+`zeph new rating-stars`
 
-	This will create
-	a new scaffolded version
-	of our rating-stars component
-	in the current directory.
-	It also will ensure
-	that we have ZephJS itself
-	and a basic index.html file.
+This will create
+a new scaffolded version
+of our rating-stars component
+in the current directory.
+It also will ensure
+that we have ZephJS itself
+and a basic index.html file.
 
-	Lets look at what was created...
+Lets look at what was created...
 
-	 - zeph.full.js is the full
-	 unminified version of ZephJS,
-	 useful for debugging and reference.
+ - zeph.full.js is the full
+ unminified version of ZephJS,
+ useful for debugging and reference.
 
-	 - zeph.min.js is the minified
-	 version of ZephJS,
-	 weighing in at under 21k.
+ - zeph.min.js is the minified
+ version of ZephJS,
+ weighing in at under 21k.
 
-	 - index.html will be created
-	 if no index.html exists
-	 and serves as an example
-	 of how to include a zephjs component.
+ - index.html will be created
+ if no index.html exists
+ and serves as an example
+ of how to include a zephjs component.
 
-	 - rating-stars.js will serve
-	 as our component definition.
+ - rating-stars.js will serve
+ as our component definition.
 
-	 - rating-stars.html provides
-	 the HTML internal content
-	 of our component.
+ - rating-stars.html provides
+ the HTML internal content
+ of our component.
 
-	 - rating-stars.css provides
-	 the CSS styling
-	 of our component
-	 and the internal content.
+ - rating-stars.css provides
+ the CSS styling
+ of our component
+ and the internal content.
 
 RUN
 
-	Now that we have
-	our scaffolded component created,
-	we can go ahead and try it out.
+Now that we have
+our scaffolded component created,
+we can go ahead and try it out.
 
-	ZephJS provides us a command
-	to easily serve and test our components:
+ZephJS provides us a command
+to easily serve and test our components:
 
-	`zeph serve`
+`zeph serve`
 
-	This will start
-	a HTTP server
-	on port 4000,
-	which we can hit
-	in our browser
-	to take a look at our page.
+This will start
+a HTTP server
+on port 4000,
+which we can hit
+in our browser
+to take a look at our page.
 
-	Currently
-	there is nothing to actually look at
-	on the page,
-	but with our inspector
-	we can see our <rating-stars> element
-	and its internal content and styles.
+Currently
+there is nothing to actually look at
+on the page,
+but with our inspector
+we can see our <rating-stars> element
+and its internal content and styles.
 
 EDIT INDEX.HTML
 
-	So lets go add something to see.
+So lets go add something to see.
 
-	First, we are going to build
-	out our index.html.
-	Let us say we are going to rate
-	the characters from Bob's Burgers:
+First, we are going to build
+out our index.html.
+Let us say we are going to rate
+the characters from Bob's Burgers:
 
-	Bob Belcher
-	Linda Belcher
-	Tina Belcher
-	Gene Belcher
-	Louise Belcher
+Bob Belcher
+Linda Belcher
+Tina Belcher
+Gene Belcher
+Louise Belcher
 
-	So let us build out our index HTML
-	to allow each to be rated
-	and add a basic heading.
+So let us build out our index HTML
+to allow each to be rated
+and add a basic heading.
 
-	Each of our rating-stars elements
-	is going to have a separate label and value.
-	The value will indicate a positive whole number
-	from 0 to 5
-	to indicate what the rating currently is.
-	We will also leave a few values
-	off entirely to show how default values work
+Each of our rating-stars elements
+is going to have a separate label and value.
+The value will indicate a positive whole number
+from 0 to 5
+to indicate what the rating currently is.
+We will also leave a few values
+off entirely to show how default values work
 
 RUN
 
-	Once added,
-	we can refresh our page and see,
-	well nothing,
-	because our rating-stars component has no content,
-	but if we use the inspector
-	we can see the html
-	for each of our rating-stars
-	and make sure all is well.
+Once added,
+we can refresh our page and see,
+well nothing,
+because our rating-stars component has no content,
+but if we use the inspector
+we can see the html
+for each of our rating-stars
+and make sure all is well.
 
 EDIT RATING-STARS.JS
 
-	Let us define some basics
-	of our component
-	so we can start seeing something.
+Let us define some basics
+of our component
+so we can start seeing something.
 
-	Our rating-stars.js file
-	is where we define our component,
-	so let us start there.
+Our rating-stars.js file
+is where we define our component,
+so let us start there.
 
-	By default rating-stars.js
-	contains two definition methods:
-	html() and css().
+By default rating-stars.js
+contains two definition methods:
+html() and css().
 
-	The html() call tells
-	us where we get our components
-	internal content from.
+The html() call tells
+us where we get our components
+internal content from.
 
-	The css() call tells
-	us where we get the styling information
-	for our component.
+The css() call tells
+us where we get the styling information
+for our component.
 
-	Both of these calls
-	are provided by our scaffolding
-	and can of course be removed or changed.
-	While you can provide
-	the HTML or CSS directly in these calls,
-	ZephJS, however,
-	recommends using external files
-	for HTML and CSS
-	just to separate everything cleanly.
+Both of these calls
+are provided by our scaffolding
+and can of course be removed or changed.
+While you can provide
+the HTML or CSS directly in these calls,
+ZephJS, however,
+recommends using external files
+for HTML and CSS
+just to separate everything cleanly.
 
-	In addition we to html() and css()
-	we also want to define a couple of attributes
-	on our rating-stars component:
-	label and value.
+In addition we to html() and css()
+we also want to define a couple of attributes
+on our rating-stars component:
+label and value.
 
-	We do this with the attrbiute()
-	definition method,
-	which we will add now...
+We do this with the attrbiute()
+definition method,
+which we will add now...
 
-	```
-	attribute("label","");
-	attribute("value","0");
-	```
+```
+attribute("label","");
+attribute("value","0");
+```
 
-	Our attribute calls
-	tell our component
-	that it has the given attributes
-	with the default values.
-	If the attribute
-	is not provided by the usage of our component,
-	the default value is inserted.
+Our attribute calls
+tell our component
+that it has the given attributes
+with the default values.
+If the attribute
+is not provided by the usage of our component,
+the default value is inserted.
 
 EDIT RATING-STARS.HTML
 
-	Next, we want to add some internal content
-	to our component,
-	so let us edit rating-stars.html.
-	In here we define the HTML
-	that makes up the inner working
-	of our component.
+Next, we want to add some internal content
+to our component,
+so let us edit rating-stars.html.
+In here we define the HTML
+that makes up the inner working
+of our component.
 
-	In our case
-	we want to define a place for our stars,
-	and a place for our label.
+In our case
+we want to define a place for our stars,
+and a place for our label.
 
-	```
-	<div class="stars">
-	</div>
-	<div class="label">
-	</div>
-	```
+```
+<div class="stars">
+</div>
+<div class="label">
+</div>
+```
 
 RUN
 
-	If we save now
-	and refresh our browser,
-	well, we get nothing still.
-	That's because although we defined our HTML,
-	we did not actually add any content,
-	just markup tags.
+If we save now
+and refresh our browser,
+well, we get nothing still.
+That's because although we defined our HTML,
+we did not actually add any content,
+just markup tags.
 
-	However, if we look with the inspector
-	we can see that the internal HTML
-	of each element is now populated.
+However, if we look with the inspector
+we can see that the internal HTML
+of each element is now populated.
 
 EDIT RATING-STARS.JS
 
-	So let us add some content
-	to our components
-	so we can start seeing something.
+So let us add some content
+to our components
+so we can start seeing something.
 
-	In the case of our example,
-	we want to take
-	the VALUE of our label ATTRIBUTE
-	and show it
-	as the content of our .label DIV.
+In the case of our example,
+we want to take
+the VALUE of our label ATTRIBUTE
+and show it
+as the content of our .label DIV.
 
-	This presents us with a chance to use a binding.
-	As discussed before a binding
-	is use to propagate some value
-	from one part of our custom element
-	or internal content of our custom element.
-	to another part of our custom element
-	or internal content of our custom element.
+This presents us with a chance to use a binding.
+As discussed before a binding
+is use to propagate some value
+from one part of our custom element
+or internal content of our custom element.
+to another part of our custom element
+or internal content of our custom element.
 
-	So let us add a binding:
+So let us add a binding:
 
-	```
-	bind("@label",".label","$");
-	```
+```
+bind("@label",".label","$");
+```
 
 RUN
 
-	Now if we refresh
-	We have labels..
+Now if we refresh
+We have labels..
 
-	We can also show here
-	that if we go in with the inspector
-	and change the "label" attribute
-	the change is propagated
-	to the .label DIV element.
+We can also show here
+that if we go in with the inspector
+and change the "label" attribute
+the change is propagated
+to the .label DIV element.
 
-	bindings are awesome!
+bindings are awesome!
 
 STARS
 
-	Next, we want to add some stars.
-	In the interest of saving time
-	let me just copy the image files
-	from somewhere else.
+Next, we want to add some stars.
+In the interest of saving time
+let me just copy the image files
+from somewhere else.
 
-	copy ../example/*.png
+copy ../example/*.png
 
-	The gave us an empty star image
-	and a filled star image.
+The gave us an empty star image
+and a filled star image.
 
-	Over in our rating-stars.html file
-	we need to add IMG tags for each.
+Over in our rating-stars.html file
+we need to add IMG tags for each.
 
-	```
-	<div class="star">
-		<img class="filled" />
-		<img class="empty" />
-	</div>
-	<div class="star">
-		<img class="filled" />
-		<img class="empty" />
-	</div>
-	<div class="star">
-		<img class="filled" />
-		<img class="empty" />
-	</div>
-	<div class="star">
-		<img class="filled" />
-		<img class="empty" />
-	</div>
-	<div class="star">
-		<img class="filled" />
-		<img class="empty" />
-	</div>
-	```
+```
+<div class="star">
+	<img class="filled" />
+	<img class="empty" />
+</div>
+<div class="star">
+	<img class="filled" />
+	<img class="empty" />
+</div>
+<div class="star">
+	<img class="filled" />
+	<img class="empty" />
+</div>
+<div class="star">
+	<img class="filled" />
+	<img class="empty" />
+</div>
+<div class="star">
+	<img class="filled" />
+	<img class="empty" />
+</div>
+```
 
-	If you are paying attention
-	you will notice
-	that we did not include
-	a SRC attribute in our IMG tags.
+If you are paying attention
+you will notice
+that we did not include
+a SRC attribute in our IMG tags.
 
-	This is because
-	I am going to show off
-	another feature of ZephJS.
+This is because
+I am going to show off
+another feature of ZephJS.
 
-	One of the definition methods
-	I skipped mentioning
-	is the asset() method.
+One of the definition methods
+I skipped mentioning
+is the asset() method.
 
-	asset() lets you associate
-	an element with some external content.
+asset() lets you associate
+an element with some external content.
 
-	ZephJS will load the asset
-	and replace the SRC attribute
-	of the associated element with
-	the asset data.
+ZephJS will load the asset
+and replace the SRC attribute
+of the associated element with
+the asset data.
 
-	So let's add an asset call:
+So let's add an asset call:
 
-	```
-	asset(".stars > .star > .filled","./rating-stars.filled.png")
-	asset(".stars > .star > .empty","./rating-stars.empty.png")
-	```
+```
+asset(".stars > .star > .filled","./rating-stars.filled.png")
+asset(".stars > .star > .empty","./rating-stars.empty.png")
+```
 
-	Something to notice here:
+Something to notice here:
 
-	Although we actually have
-	ten IMG tags in our HTML
-	I only added two asset calls
-	one for each type (emtpy or filled).
-	This is because
-	if when matching an CSS Query Selector
-	such as the first argument of asset()
-	if this produces multiple hits,
-	each hit is used.
-	This is applies to asset()
-	but also to bind() / bindAt()
-	and onEvent() / onEventAt()
+Although we actually have
+ten IMG tags in our HTML
+I only added two asset calls
+one for each type (emtpy or filled).
+This is because
+if when matching an CSS Query Selector
+such as the first argument of asset()
+if this produces multiple hits,
+each hit is used.
+This is applies to asset()
+but also to bind() / bindAt()
+and onEvent() / onEventAt()
 
 RUN
 
-	A quick refresh
-	and we now have stars.
+A quick refresh
+and we now have stars.
 
-	But of course,
-	we have too many stars.
+But of course,
+we have too many stars.
 
-	So let us go add some
-	CSS to make all this
-	look correctly.
+So let us go add some
+CSS to make all this
+look correctly.
 
 EDIT RATING-STARS.CSS
 
-	Instead of typing all this CSS in
-	I'm just going to cut and paste it
-	to save some time.
+Instead of typing all this CSS in
+I'm just going to cut and paste it
+to save some time.
 
-	The fundamental idea
-	is to layout the component
-	and hide the empty stars
-	when filled
-	and the filled stars
-	when empty.
+The fundamental idea
+is to layout the component
+and hide the empty stars
+when filled
+and the filled stars
+when empty.
 
-	You will notice that the CSS
-	we use make usage
-	of the :host psuedo-selector.
+You will notice that the CSS
+we use make usage
+of the :host psuedo-selector.
 
-	The :host psuedo-selector allows CSS
-	to target the hosting custom element
-	Otherwise the CSS only
-	applies to the internal content.
+The :host psuedo-selector allows CSS
+to target the hosting custom element
+Otherwise the CSS only
+applies to the internal content.
 
-	And this is one of the great things
-	about web components.
-	none of the CSS we use
-	will leak out of the web component.
-	So our component
-	can use really simple class name
-	and selectors
-	without any concern of affecting
-	any external elements.
+And this is one of the great things
+about web components.
+none of the CSS we use
+will leak out of the web component.
+So our component
+can use really simple class name
+and selectors
+without any concern of affecting
+any external elements.
 
 RUN
 
-	A quick refresh
-	and now we have stars.
+A quick refresh
+and now we have stars.
 
-	Our final piece of the puzzle,
-	we need the stars
-	to react to click events.
-	So if I click star
-	number 2,
-	the rating value
-	gets changed to 2,
-	and everything updates.
+Our final piece of the puzzle,
+we need the stars
+to react to click events.
+So if I click star
+number 2,
+the rating value
+gets changed to 2,
+and everything updates.
 
 EDIT RATING-STARS.JS
 
-	So back to rating-stars.js
-	We are going to add
-	an event handler.
+So back to rating-stars.js
+We are going to add
+an event handler.
 
-	We want to handle
-	The click event
-	on each star.
+We want to handle
+The click event
+on each star.
 
-	To do so we are going to use
-	our onEventAt()
-	definition method.
+To do so we are going to use
+our onEventAt()
+definition method.
 
-	onEventAt lets us target a specific
-	internal content element
-	and listen for a specific eventType,
-	in this case the "click" event.
+onEventAt lets us target a specific
+internal content element
+and listen for a specific eventType,
+in this case the "click" event.
 
-	When the click event happens,
-	the listener will execute.
+When the click event happens,
+the listener will execute.
 
-	The listener gets four arguments:
-	 - The event itself
-	 - The element the event occured on ("the selected element")
-	 - The custom element itself
-	 - And the DocumentFragment of the internal content.
+The listener gets four arguments:
+ - The event itself
+ - The element the event occured on ("the selected element")
+ - The custom element itself
+ - And the DocumentFragment of the internal content.
 
-	Inside our listener
-	we can compute which star
-	number is being clicked
-	with a little simple DOM
-	magic.
+Inside our listener
+we can compute which star
+number is being clicked
+with a little simple DOM
+magic.
 
-	Once we know the value,
-	we simply update the value attribute
-	and our CSS takes care of the rest.
+Once we know the value,
+we simply update the value attribute
+and our CSS takes care of the rest.
 
 BUNDLE
 
-	One last feature
-	I'd like to mention
-	before wrapping up
-	Is bundling.
+One last feature
+I'd like to mention
+before wrapping up
+Is bundling.
 
-	Web Components are onlyreally useful
-	if they can be distributed.
+Web Components are onlyreally useful
+if they can be distributed.
 
-	So ZephJS provides a means
-	to bundle your component
-	into a single file.
+So ZephJS provides a means
+to bundle your component
+into a single file.
 
-	The bundler,
-	which is based on Rollup,
-	Will traverse your definitions
-	find any html() or css() calls
-	and inline the content.
-	Any asset() calls are
-	also inlined.
-	Finally the bundler
-	wraps it all together with
-	a fresh minmized copy
-	of ZephJS
-	producing a single JS file
-	which contains everything
-	need for the component.
+The bundler,
+which is based on Rollup,
+Will traverse your definitions
+find any html() or css() calls
+and inline the content.
+Any asset() calls are
+also inlined.
+Finally the bundler
+wraps it all together with
+a fresh minmized copy
+of ZephJS
+producing a single JS file
+which contains everything
+need for the component.
 
-	`zeph bundle rating-stars.js rs.js`
+`zeph bundle rating-stars.js rs.js`
 
 WRAP
 
-	So that is ZephJS.
-	I hope you all find it
-	as easy to use and read
-	as I do.
+[ZephJS Logo and Links]
 
-	There is a ton of documentation available here.
+So that is ZephJS.
+I hope you all find it
+as easy to use and read
+as I do.
 
-	I do have one last request
-	of everyone here
-	before we go drink beer...
+There is a ton of documentation available here.
 
-	Please give ZephJS a try.
-	Please give ZephJS some github stars.
-	And please help me spread the word
-	by tweeting and retweeting ZephJS.
+I do have one last request
+of everyone here
+before we go drink beer...
 
-	I am super excited about it
-	and I really want to see it
-	and the community around it grow.
+[Try, Start, Tweet]
 
-	Thanks a bunch.
-	Let's go get pissed.
-	
+Please give ZephJS a try.
+Please give ZephJS some github stars.
+And please help me spread the word
+by tweeting and retweeting ZephJS.
+
+I am super excited about it
+and I really want to see it
+and the community around it grow.
+
+[Free Beer]
+
+In fact, if you come to the bar
+and find me
+and promise me you are going
+to try, star, and tweet
+about ZephJS
+I will buy you a beer.
+
+[Let's Get Pissed!]
+
+Thanks a bunch.
+Let's go get pissed.
