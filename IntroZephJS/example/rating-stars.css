@@ -1,0 +1,66 @@
+:host {
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.stars {
+	flex: 0 0 auto;
+	display: flex;
+}
+
+.label {
+	flex: 1 0 auto;
+	margin-left: 15px;
+}
+
+.stars > * {
+	margin-right: 5px;
+	display: block;
+	cursor: pointer;
+}
+
+.stars > .star > .empty {
+	flex: 0 0 auto;
+	display: inherit;
+}
+
+.stars > .star > .filled {
+	flex: 0 0 auto;
+	display: none;
+}
+
+:host([value="1"]) .stars > .star:nth-child(1) > .filled,
+:host([value="2"]) .stars > .star:nth-child(1) > .filled,
+:host([value="3"]) .stars > .star:nth-child(1) > .filled,
+:host([value="4"]) .stars > .star:nth-child(1) > .filled,
+:host([value="5"]) .stars > .star:nth-child(1) > .filled,
+:host([value="2"]) .stars > .star:nth-child(2) > .filled,
+:host([value="3"]) .stars > .star:nth-child(2) > .filled,
+:host([value="4"]) .stars > .star:nth-child(2) > .filled,
+:host([value="5"]) .stars > .star:nth-child(2) > .filled,
+:host([value="3"]) .stars > .star:nth-child(3) > .filled,
+:host([value="4"]) .stars > .star:nth-child(3) > .filled,
+:host([value="5"]) .stars > .star:nth-child(3) > .filled,
+:host([value="4"]) .stars > .star:nth-child(4) > .filled,
+:host([value="5"]) .stars > .star:nth-child(4) > .filled,
+:host([value="5"]) .stars > .star:nth-child(5) > .filled {
+	display: block;
+}
+
+:host([value="1"]) .stars > .star:nth-child(1) > .empty,
+:host([value="2"]) .stars > .star:nth-child(1) > .empty,
+:host([value="3"]) .stars > .star:nth-child(1) > .empty,
+:host([value="4"]) .stars > .star:nth-child(1) > .empty,
+:host([value="5"]) .stars > .star:nth-child(1) > .empty,
+:host([value="2"]) .stars > .star:nth-child(2) > .empty,
+:host([value="3"]) .stars > .star:nth-child(2) > .empty,
+:host([value="4"]) .stars > .star:nth-child(2) > .empty,
+:host([value="5"]) .stars > .star:nth-child(2) > .empty,
+:host([value="3"]) .stars > .star:nth-child(3) > .empty,
+:host([value="4"]) .stars > .star:nth-child(3) > .empty,
+:host([value="5"]) .stars > .star:nth-child(3) > .empty,
+:host([value="4"]) .stars > .star:nth-child(4) > .empty,
+:host([value="5"]) .stars > .star:nth-child(4) > .empty,
+:host([value="5"]) .stars > .star:nth-child(5) > .empty {
+	display: none;
+}
