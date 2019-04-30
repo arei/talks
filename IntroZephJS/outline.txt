@@ -154,7 +154,7 @@ at the heart of ZephJS is the
 
 To this you provide two things:
 
- - The tag name if the componnet you wish to define
+ - The tag name if the component you wish to define
  - and a definition function in which you describe the component.
 
 The tag name must be
@@ -176,28 +176,134 @@ you can use to describe various aspects of your component:
 Some of the more interesting ones are
 
 html()
+
+	The html() definition method
+	is used to indicate the internal content
+	of the component.
+
+	It can be a string of inline HTML
+	or it can be a url or relative path reference
+	to an external file.
+
 css()
+
+	the css() definition method
+	is used to indicate the styling
+	for the component and the internal content.
+
+	It can be a string of inline CSS
+	or it can be a url or relative path reference
+	to an external file.
+
 asset()
 
-These methods are used to describe content, styling, and external resource for your component.
+	The asset() definition method
+	is used to indicate some external
+	image, audio, or video asset that
+	should be associated with an element
+	within the internal content.
+
+	Using asset() is strictly optional,
+	but can also be very valuable when you
+	are ready to bundle your component up
+	to distribute.
+
+	When the bundler encounters an asset() call
+	it will locate and read the file and
+	replace the asset() call with a data: url
+	containing the asset data.
+
+	This means that the bundle contains
+	not only the js/html/css needed for the component
+	but it can also contain the underlying assets as well
+	and distributors only have to ship the one file
+	instead of the definition and the assets as separate files.
 
 attribute()
+
+	The attribute() definition method
+	is used to indicate that the component has
+	an attribute.
+
+	Additionally attribute() can provide
+	a default or initial value
+	for the attribute.
+
+	attribute() is optional,
+	but will make your component more readable.
+
 property()
 
-These methods define an attribute or property of the component.
+	The property() definition method
+	is used to indicate that the componnet has
+	a exposed javascript property.
+
+	Additionally property() can provide
+	a default or initial value
+	for the property.
+
+	property() is optional,
+	but will make your component more readable.
 
 bind()
+
+	The bind() definition method
+	is used to propagate
+	an attrbiute, property, or content of,
+	the element
+	to some other part of the element
+	or internal content of the element.
+
+	ZephJS does not support
+	a render property like react or angular.
+	Instead, you use bind() to propagate
+	changes around the component.
+
+	The bind() method takes three arguments:
+
+	The source item to bind, which can be one of the following:
+
+		An attribute (which is signaled by the first character being an @ character)
+
+		A property (which is signaled by the first character being a . character)
+
+		The content of the element (which is signaled by the entire item string being a $ character)
+
+	A target CSS Query Selector of where in the internal content the propagated change should be written.
+
+	The target item to write to, which has the same structure as the source item above:
+
+		An attribute (which is signaled by the first character being an @ character)
+
+		A property (which is signaled by the first character being a . character)
+
+		The content of the element (which is signaled by the entire item string being a $ character)
+
 bindAt()
 
-Used to propagate changes to an attribute, property, or content of the component to some other part of the component.  For example, we can bind an attribute of the component to a property of the component, and when the attribute changes, ZephJS will automatically update the property at the same time. Bindings are an incredibly useful feature of ZephJS.
+	The bindAt() method is the same as bind()
+	except the first argument is
 
-onInit()
+	A source CSS Query Selector of where in the internal content to watch for changes.
+
 onCreate()
+
+	The onCreate() definition method
+	gets a function as its only argument.
+	This function is called any time
+	an element is created for this component.
+
+	The function is passed the element,
+	and the DocumentFragment for the internal content
+	as its first two arguments.
+
+	onCreate() allows one to tap into
+	the creation process of an element
+	and do some additional work as needed.
+
 onAdd()
 onRemove()
-onAdopt()
-onAttribute()
-onProperty()
+
 
 These allow the developer of the component to tap into one or more of the lifecylce events a component goes through from initialization to creation to addition/removal/adoption to attribute/property changes.
 
@@ -228,55 +334,159 @@ and the text of what is being rated..
 
 So let's get at it..
 
-First, lets setup our project which we will call rating-stars.
+DEFINITIONS
 
-`npm init`
+	First a couple of things to keep in mind as we move forward...
 
-Next, we install ZephJS globally.  This gives us access to the ZephJS command line tool which will serve to help work with Zeph..
+	 - When I refer to the Component or Custom Component, I am talking about the definition of the component.  A component is the definition, an element is the execution.
 
-`npm install -g zephjs`
+	 - When I refer to the Element or Custom Element, I am talking about an instance of the component, as created by using the component in the HTLM (or with document.createElement()).
 
-Once ZephJS is installed we can use the ZephJS CLI (called "zeph") to scaffold our componnet:
+	 - When I refer to the Internal Content of an Element, I am talking about all of the inner elements used in rendering the Element. Generally this is the HTML provided by an html() call which we will discuss in a minute.
 
-`zeph new rating-stars`
+	 - An attribute is an HTML attribute of the element.
 
-This will create scaffolded rating.starts.js, .html and .css files,  as well as ensure that zeph.full.js and zeph.min.js and a default index.html exists for our project. Lets look at each of these quickly...
+	 - A property is a JavaScript property associated with the element.
 
-zeph.full.js is the full unminified version of ZephJS, useful for debugging and reference.
+	 - The Content of an element is the innerHTML body of the element.
 
-zeph.min.js is the minified version of ZephJS, weighing in at under 21k.
+SETUP
 
-index.html will be created if no index.html exists and serves as an example of how to include a zephjs component.
+	Alright, lets setup our project which we will call rating-stars.
 
-rating-stars.js will serve as our component definition.
+	`npm init`
 
-rating-stars.html provides the html content of our component.  In ZephJS you can provide the html inline in the definition, or as an external file.  The external file approach is cleaner, so that is what is recommended.
+INSTALL
 
-rating-stars.css provides the css styling of our component.  In ZephJS you can provide the css inline in the definition, or as an external file.  The external file approach is cleaner, so that is what is recommended.
+	Next, we install ZephJS globally.  This gives us access to the ZephJS command line tool which will help work with Zeph...
 
-Okay, so we have our scaffolded component created, we can go ahead and try it out.  ZephJS provides us a command line command to easily serve and test our components:
+	`npm install -g zephjs`
 
-`zeph serve`
+SCAFFOLD
 
-Ths will start a HTTP Serve on port 400, which we can hit in our browser to take a look at our page:
+	Once ZephJS is installed we can use the ZephJS CLI (called "zeph") to scaffold our component:
 
-But, currently there is nothing to actually lok at on the page, but with our inspector we can see our <rating-stars> element and it internal content and styles.
+	`zeph new rating-stars`
 
-So lets go add something to see.
+	This will create a new scaffolded version of our rating-stars component in the current directory.  It also will ensure that we have ZephJS itself and a basic index.html file.
 
-First, we are going to build out our index.html. Let us say we are going to rate the characters from Bob's Burgers:
+	Lets look at what was created...
 
-Bob Belcher
-Linda Belcher
-Tina Belcher
-Gene Belcher
-Louise Belcher
+	 - zeph.full.js is the full unminified version of ZephJS, useful for debugging and reference.
 
-So let us build out our index html to allow each to be rated and add a basic heading. Each of our rating-stars elements is going to have a separate label and value. The value will indicate a positive whole number from 0 to 5 to indicate what the rating currently is. We will also leave a few values off entirely to show how default values work:
+	 - zeph.min.js is the minified version of ZephJS, weighing in at under 21k.
 
-WE can refresh our page and see, well nothing,  because our rating-stars component has no content, but if we use the inspector we can see the html for each of our rating-stars and make sure all is well.
+	 - index.html will be created if no index.html exists and serves as an example of how to include a zephjs component.
 
-Let us define some basics of our component so we can start seeing something.
+	 - rating-stars.js will serve as our component definition.
+
+	 - rating-stars.html provides the HTML internal content of our component.  In ZephJS you can provide the HTML inline in the definition or as an external file.  The external file approach is cleaner, so that is what is recommended and scaffolded by default.
+
+	 - rating-stars.css provides the CSS styling of our component and the internal content.  In ZephJS you can provide the CSS inline in the definition or as an external file.  The external file approach is cleaner, so that is what is recommended and scaffolded by default.
+
+RUN
+
+	Now that we have our scaffolded component created, we can go ahead and try it out.
+
+	ZephJS provides us a command line command to easily serve and test our components:
+
+	`zeph serve`
+
+	This will start a HTTP server on port 4000, which we can hit in our browser to take a look at our page.
+
+	Currently there is nothing to actually look at on the page, but with our inspector we can see our <rating-stars> element and its internal content and styles.
+
+EDIT INDEX.HTML
+
+	So lets go add something to see.
+
+	First, we are going to build out our index.html. Let us say we are going to rate the characters from Bob's Burgers:
+
+	Bob Belcher
+	Linda Belcher
+	Tina Belcher
+	Gene Belcher
+	Louise Belcher
+
+	So let us build out our index HTML to allow each to be rated and add a basic heading. Each of our rating-stars elements is going to have a separate label and value. The value will indicate a positive whole number from 0 to 5 to indicate what the rating currently is. We will also leave a few values off entirely to show how default values work:
+
+RUN
+
+	Once added, we can refresh our page and see, well nothing, because our rating-stars component has no content, but if we use the inspector we can see the html for each of our rating-stars and make sure all is well.
+
+EDIT RATING-STARS.JS
+
+	Let us define some basics of our component so we can start seeing something.
+
+	In our rating-stars.js file is where we define our component, so let us start there.
+
+	By default rating-stars.js contains two definition methods: html() and css().
+
+	The html() call tells where to get our components internal content from.
+
+	The css() call tells us where to get the styling information for our component.
+
+	Both of these calls are provided by our scaffolding and can of course be removed or changed. While you can provide the HTML or CSS directly in these calls, ZephJS, however, recommends using external files from HTML and CSS just to separate the two.
+
+	In addition we to html() and css() we also want to define a couple of attributes on our rating-stars component: label and value.  We do this with the attrbiute() definition method, which we will add now...
+
+	```
+	attribute("label","");
+	attribute("value","0");
+	```
+
+	Our attribute calls tell our component that it has the given attributes with the default values. If the attribute is not provided by the usage of our component, the default value is inserted. Attribute calls are optional, since any attribute can be set on any tag without an error, but it is very helpful for readability to set them in your definition.
+
+EDIT RATING-STARS.HTML
+
+	Next, we want to add some internal content to our component, so let us edit rating-stars.html.  In here we define the HTML that makes up the inner working of our component.  In our case we want to define a place for our stars, and a place for our labels.
+
+	```
+	<div class="stars">
+	</div>
+	<div class="label">
+	</div>
+	```
+
+RUN
+
+	If we save now and refresh our browser, well, we get nothing still.  That's because although we defined our HTML, we did not actually add any content, just tags.
+
+	However, if we look with the inspector we can see that the internal HTML of each element is now populated.
+
+EDIT RATING-STARS.JS
+
+	So let us add some content to our components so we can start seeing something.
+
+	In the case of our example, we want to take the VALUE of our label ATTRIBUTE and show it as the content of our .label DIV.
+
+	This presents use with one of the interesting challenges ZephJS overcomes: How do we propagate content from one part of a component to another?  In Angular or React one might use a template within their render field but ZephJS doesn't work like that.  Instead, Zeph uses bindings to achieve a more standards based approach to this problem.
+
+	ZephJS has two methods bind() and bindAt() to map one part of the component to another.
+
+		bind() is used to map an attribute, property, or the content of, the custom component itself, to some other part of the component.
+
+		bindAt() is used to map an attribute, property, or the content of, some element within the internal content, to some other part of the component.
+
+	For our example we need to bind() the ATTRIBUTE "label" of our element, to the content of the .label DIV tag in the internal content.
+
+		`bind("@label","div.label","$")`
+
+	This might look a little confusing, but once you understand the basics here it will make a lot of sense.
+
+	bind() takes at least three arguments:
+
+		The item to bind to which can be one of the following:
+
+			An attribute (which is signaled by the first character being an @ sign)
+
+			A property (which is signaled)
+
+
+
+
+
+
 
 First, we create some content for our rating-stars.html and let our component start to take shape.
 We will create a place for our label, and a place for our stars, and five stars.
