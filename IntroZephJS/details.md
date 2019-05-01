@@ -13,11 +13,11 @@ An introduction to the ZephJS library. ZephJS is an extremely easy to use, simpl
 
 #### Slides
 
-* In Powerpoint Format: [IntroZephjS.pptx](https://github.com/arei/talks/raw/master/IntroZephjS/IntroZephjS.pptx)
-* In Adobe PDF Format: [IntroZephjS.pdf](https://github.com/arei/talks/raw/master/IntroZephjS/IntroZephjS.pdf)
+ - In Powerpoint Format: [IntroZephjS.pptx](https://github.com/arei/talks/raw/master/IntroZephjS/IntroZephjS.pptx)
+ - In Adobe PDF Format: [IntroZephjS.pdf](https://github.com/arei/talks/raw/master/IntroZephjS/IntroZephjS.pdf)
 
 #### Example code
-
+ - [Rating Stars Example](https://github.com/arei/talks/tree/master/IntroZephJS/example)
 
 #### License
 

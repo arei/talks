@@ -6,3 +6,4 @@ Below are all of the conference talks I have given so far.  Follow the links for
 * [The Morality of Code](https://github.com/arei/talks/blob/master/MoralityOfCode/details.md)
 * [Why are you "Awaiting" to use Async - An introduction to async/await](https://github.com/arei/talks/blob/master/AwaitingAsync/details.md)
 * [Building an Awesome API Server - Introducing AwesomeLog, AwesomeConfig and AwesomeServer](https://github.com/arei/talks/blob/master/BuildingAwesome/details.md)
+* [Introducing ZephJS - Web Components done Easy](https://github.com/arei/talks/blob/master/IntroZephJS/details.md)
