@@ -25,7 +25,6 @@ ZephComponents.define("rating-stars",()=>{
 		let index = [...parent.children].indexOf(selected);
 		let value = "" + (index + 1);
 
-		console.log("click",value,element.getAttribute("value"))
 		if (element.getAttribute("value")===value) value = "0";
 
 		element.setAttribute("value",value);
