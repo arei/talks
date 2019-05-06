@@ -11,7 +11,7 @@ An introduction to the [ZephJS](https://github.com/awesomeeng/zephjs) library. [
 * CharmCityJS
   - May 1, 2019 @ 7:00pm (EDT)
   - By Glen R. Goodwin
-  - No Recording Available
+  - Recording at [https://www.youtube.com/watch?v=6nd81XLn7mE](https://www.youtube.com/watch?v=6nd81XLn7mE)
 
 #### Slides
 
