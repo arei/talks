@@ -1,5 +1,5 @@
 An introduction to using three new libraries from Awesome Engineering
-to rapidly build any enterprise ready API Server. Specifically will
+to rapidly build any enterprise API Server. Specifically will
 touch upon AwesomeServer, AwesomeLog, and AwesomeConfig, and how the
 three are used to build out an API server.
 
