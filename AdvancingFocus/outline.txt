@@ -1,0 +1,87 @@
+Advancing Focus
+
+Some things in web development just work; they do what they are supposed to do day in and day out, and we don't ever have to worry about them. It's the "little engine that could" story: it's reliable, it stable, it's trustworthy. The Focus subsystem is one such system... reliable, stable, trustworthy, but is it good... does it meet the needs of modern web development? This talk delves into the Focus subsystem for Web Browsers and asks us to consider is there more it could be doing and how do we make it happen?
+
+https://raw.githubusercontent.com/arei/talks/master/headshot.jpg
+
+Intro
+
+SEt the STage - TAlk about what we are talking about
+
+History of Focus
+
+How Focus Works Today
+
+	.focus()
+
+	focus and blur events
+
+	foucsin and focusout events
+
+	document.activeElement
+
+What could make it better?
+
+	What can receive focus? Focusable
+
+	Incrementing Focus
+
+ 	Decrementing focus
+
+	tracking focus
+
+	focus trapping
+
+How do we get there?
+
+	The WICG and "The Process"
+
+	THe Focus TRaversal API Proposal
+
+	THe Polyfill
+
+	Eyeballs Needed
+
+	Mentions Needed
+
+
+---
+
+Greetings.
+
+If you could all focus on me.
+
+<pause>
+
+Do you see what I just did there?
+
+I started a talk
+about focus
+by asking you to focus
+Clever huh?
+
+So...
+
+My name is Glen.
+
+And today I'm here to talk to you about
+Focus.
+
+Not focus like I just asked for,
+not the focus of attention,
+but the user interface version of focus,
+In our browsers.
+
+User Interface focus
+is about the browser
+determining what element
+gets user input events.
+
+A user input event is
+a key press or release
+a mouse click
+a screen tap
+an assistance device input
+a clipboard paste
+
+A user input event 

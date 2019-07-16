@@ -2,6 +2,10 @@ Some Perspective on Web Components
 
 In 2011 Alex Russell first presented the vision for Web Components; a vision of an extensible DOM that allows developers to change the semantics of HTML to suite their goals.  Fast forward eight years and Web Components is finally a realized vision; Yet, there is still a culture of ignorance around how Web Components are built and used, why they are incredibly important to the future of the Web, and why you should be reaching for them long before you consider using one of the modern mega-frameworks. Join us for a little bit of history, a little bit of technical talk, and a whole lot of perspective about Web Components.
 
-"What we are implicitly saying here is that the browser didn't have a semantic for this. I wanted to say something that was so far away from what the browser could actually give me the ability to say for myself that I wanted to cobble up a new one." - Alex Russell - https://vimeo.com/33430613
+https://raw.githubusercontent.com/arei/talks/master/headshot.jpg
 
 -----------------------
+
+
+
+"What we are implicitly saying here is that the browser didn't have a semantic for this. I wanted to say something that was so far away from what the browser could actually give me the ability to say for myself that I wanted to cobble up a new one." - Alex Russell - https://vimeo.com/33430613
