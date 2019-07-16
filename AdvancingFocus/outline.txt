@@ -64,24 +64,37 @@ So...
 
 My name is Glen.
 
-And today I'm here to talk to you about
-Focus.
+And I want to talk to you
+about the browser focus subsystem.
 
-Not focus like I just asked for,
-not the focus of attention,
-but the user interface version of focus,
-In our browsers.
+For most of us,
+browser focus just works.
+I press TAB
+and focus increments.
+I press SHIFT-TAB
+and focus decrements.
 
-User Interface focus
-is about the browser
-determining what element
-gets user input events.
+The focus subsystem
+was first formally added
+to the Document Object Model Specification Level 1
+in January of 1998.
 
-A user input event is
-a key press or release
-a mouse click
-a screen tap
-an assistance device input
-a clipboard paste
+And barring a few very small additions,
+this is the focus system
+we work with today.
 
-A user input event 
+And that's fine.
+It's a 20 year old API
+and it does its job.
+Until it doesnt.
+
+Say we have a form
+with two fields
+a username and a password.
+And our client wants
+to advance the focus
+from the username field
+to the password field
+when the enter key is pressed
+and only if the username field
+has some content.
