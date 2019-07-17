@@ -1,50 +1,4 @@
-Advancing Focus
-
-Some things in web development just work; they do what they are supposed to do day in and day out, and we don't ever have to worry about them. It's the "little engine that could" story: it's reliable, it stable, it's trustworthy. The Focus subsystem is one such system... reliable, stable, trustworthy, but is it good... does it meet the needs of modern web development? This talk delves into the Focus subsystem for Web Browsers and asks us to consider is there more it could be doing and how do we make it happen?
-
-https://raw.githubusercontent.com/arei/talks/master/headshot.jpg
-
-Intro
-
-SEt the STage - TAlk about what we are talking about
-
-History of Focus
-
-How Focus Works Today
-
-	.focus()
-
-	focus and blur events
-
-	foucsin and focusout events
-
-	document.activeElement
-
-What could make it better?
-
-	What can receive focus? Focusable
-
-	Incrementing Focus
-
- 	Decrementing focus
-
-	tracking focus
-
-	focus trapping
-
-How do we get there?
-
-	The WICG and "The Process"
-
-	THe Focus TRaversal API Proposal
-
-	THe Polyfill
-
-	Eyeballs Needed
-
-	Mentions Needed
-
-
+# Advancing Focus
 ---
 
 Greetings.
@@ -74,6 +28,8 @@ and focus increments.
 I press SHIFT-TAB
 and focus decrements.
 
+<pause>
+
 The focus subsystem
 was first formally added
 to the Document Object Model Specification Level 1
@@ -86,6 +42,7 @@ we work with today.
 And that's fine.
 It's a 20 year old API
 and it does its job.
+
 Until it doesnt.
 
 Say we have a form
@@ -98,6 +55,22 @@ to the password field
 when the enter key is pressed
 and only if the username field
 has some content.
+
+<aside>
+
+I was recently telling someone
+about this scenario
+and they were shocked
+someone would want to
+advance focus on the enter key press
+I was shocked that they were shocked.
+How had they never heard of this before?
+It was very eye opening
+for both of us
+to get the different perspective
+of the other.
+
+</aside>
 
 Today we build this
 exactly the same way
@@ -284,7 +257,7 @@ those two functions
 And what other focus things
 could we expose
 or add
-to make foucs better?
+to make focus better?
 
 <pause>
 
@@ -314,7 +287,7 @@ work being done in the WHATWG.
 
 This is great news for everyone.
 A single body
-overseeing the standard.
+overseeing the HTML standard.
 Finally.
 
 Now,
@@ -395,7 +368,7 @@ A Focus Subsystem Proposal to the HTML Specification
 This proposal
 introduces the concepts
 of a Focus Traversal API
-o solve the two problems
+to solve the two problems
 we discussed earlier:
 How to determine what is focusable
 and how to programmatically advance the focus
@@ -427,32 +400,36 @@ in the HTML standard.
 
 #### Next/Previous Focus
 
-Moving the focus forward
-or backward is a key operation for developers
+Moving the focus
+forward or backward
+is a key operation for developers
 and the Focus Traversal API
 seeks to ease this process
 with `focusManager.next(element)`
 and `focusManager.previous(element)`
 methods.
+
 These functions will return
 the next (or previous) element
 that meets the `focusManager.isFocusable()` condition,
 or null.
 
+This only indicates which element
+is next or prior,
+it does not actually
+move the focus.
+
+For that we turn to...
+
 #### Forward/Backward Focus Traversal
 
-A method to allow users
-to programmatically
-move the focus forward or backward
-without having to manually compute
-the next or previous focus
-is highly desirable.
 `focusManager.forward()` takes
 the currently focused element
 and computes the next element
 that meets the `focusManager.isFocusable()` condition,
 and advances the focus to that element
 using `element.focus()`.
+
 `focusManager.backward()` is similar
 but it computes the pervious element
 that meets the `focusManager.isFocusable()` condition
@@ -462,7 +439,7 @@ using `element.focus()`.
 #### Other Features
 
 As part of this proposal
-some additional conveiniences
+some additional conveniences
 are offered
 in an attempt to centralize
 and organize the focus system.
@@ -471,6 +448,8 @@ and organize the focus system.
 Contains the element
 currently holding the focus,
 if any.
+Functionally the same as
+`document.activeElement`.
 
 `window.focusManager.previouslyFocused` -
 Contains the element
@@ -502,10 +481,13 @@ Returns an array
 of all focusable elements
 in the order that
 focus traversal would occur.
+
 Can take an optional container
 which would limit the results
 to just descendants
 of that container.
+
+<pause>
 
 So that's the Proposed
 Focus Traversal API.
@@ -537,6 +519,7 @@ help grow the proposal.
 
 And we need people
 to spread the word.
+
 I'm going to live tweet a picture
 from this talk
 with the links
@@ -551,6 +534,9 @@ And finally,
 if you are a browser implementor
 or have any sway with them
 come talk to me.
+
 And lets figure out how
 we can advance focus
 together!
+
+Thanks for your focus.
