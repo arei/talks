@@ -79,8 +79,8 @@ was first formally added
 to the Document Object Model Specification Level 1
 in January of 1998.
 
-And barring a few very small additions,
-this is the focus system
+and twenty years later,
+it is the same focus system
 we work with today.
 
 And that's fine.
@@ -98,3 +98,459 @@ to the password field
 when the enter key is pressed
 and only if the username field
 has some content.
+
+Today we build this
+exactly the same way
+we did back then,
+albiet with slightly better syntax.
+
+```
+let userField = document.querySelector(".my-user-field");
+let passField = document.querySelector(".my-pass-field");
+userField.addEventListener("keyup",(event)>={
+	if (event.keyCode===13) {
+		passField.focus();
+	}
+});
+```
+
+And this is fine.
+Until we start to talk about Web Components.
+
+Say we want to do our same example
+but with each field as its own Web Component
+which wraps the INPUT tag.
+for whatever reason.
+
+So our code might look like this:
+(
+	A note here...
+	I'm using ZephJS to define
+	the web component.
+	I find it simplifies
+	writing them.
+	You can check it out at
+	zephjs.com
+)
+
+import {ZephComponents,html,onEventAt} from "ZephJS";
+ZephComponents.define("my-user-field",()=>{
+	html(`
+		<div class="wrapper">
+			<input class="field" type="text"></input>
+		</div>
+	`);
+
+	onEventAt("input","keyup",(el,shadow,event)=>{
+		if (event.keyCode===13) {
+
+			???????????????
+
+		}
+	});
+});
+
+The problem is,
+that our my-user-field component
+is entirely encapsulated
+and knows nothing about
+what is outside of it.
+
+We have no easy way
+to just tell the focus
+to advance to the next place.
+
+Now,
+everyone in this room
+is probably thinking
+just walk the tree
+starting at your element
+and locate the next element
+which can receive focus
+and advance to that.
+
+Seems like a logical solution, right?
+But this brings up a really hard question
+about focus...
+
+What makes an element
+able to receive focus?
+What indicates something is focusable?
+
+And there are some easy answers
+
+If the element is an INPUT tag
+or Link
+or BUTTON tag
+it can receive focus.
+Except if it is DISABLED
+or has a tabindex attribute of negative one
+or is hidden
+or is within a fieldset that is DISABLED
+or is within a form that is DISABLED
+but not all the time.
+
+See, determining what is Focusable
+is really hard.
+and its incredibly inconsistent
+across different browsers
+
+Someone even made
+a fancy chart
+https://allyjs.io/data-tables/focusable.html
+which I tried to shrink down
+and get onto one slide
+but there are just
+too many edge cases.
+
+Of course,
+we can always go to the Spec
+and that should be
+super easy to understand.
+
+https://www.w3.org/TR/2018/WD-html53-20181018/editing.html#focus
+Section 5.4 of the W3C HTML Specification
+details the focus subsystem.
+Here's what it says about what is focusable
+
+	- Elements that have their tabindex focus flag set, that are not actually disabled, that are not expressly inert, and that are either being rendered or being used as relevant canvas fallback content.
+
+	- The shapes of area elements in an image map associated with an img element that is being rendered and is not expressly inert.
+
+	- The user-agent provided subwidgets of elements that are being rendered and are not actually disabled or expressly inert
+
+	- The scrollable regions of elements that are being rendered and are not expressly inert.
+
+	- The viewport of a Document that is in a browsing context and is not inert.
+
+	- Any other element or part of an element, especially to aid with accessibility or to better match platform conventions.
+
+And I dont know about you
+but I find this complicated
+and confusing
+as well.
+
+and honestly,
+I really dont want to write
+a method that tries
+to figure this out.
+
+<pause>
+
+So we essentially have two problems
+
+we have no easy way
+to advance the focus
+automatically.
+
+and we have no easy way
+to determine what can receive focus,
+what is focusable,
+if we wanted to walk the tree.
+
+And the annoying thing about
+these two problems
+is that internally
+in the browsers,
+both these problems
+are already solved.
+
+The browsers,
+internally,
+have a means to determine
+if an element is focusable
+and they have a means
+to advance the focus to
+the next focusable element.
+
+The focus subsystem today,
+is mostly a passive thing.
+we can read it,
+we can tell where the focus is
+and when it changes,
+and we can direct it
+if we know exactly
+where to direct it.
+And this is okay...
+But is it good?
+is it enough?
+could it do more
+to make developers lives easier?
+
+Wouldn't it make sense
+if they could expose
+those two functions
+
+And what other focus things
+could we expose
+or add
+to make foucs better?
+
+<pause>
+
+So let me tell you
+how you go about changing
+the HTML Specification
+
+First, as most of you may be aware
+there are two separate
+governing bodies
+maintaining the HTML standard
+The W3C
+and the WHATWG
+
+And until this past May
+they worked independently
+of one another
+but tacitly acknowledging
+one another.
+
+In May of 2019 (https://www.w3.org/blog/2019/05/w3c-and-whatwg-to-work-together-to-advance-the-open-web-platform/)
+both the W3C and WHATWG
+signed an agreement
+to work together
+with the HTML Specification
+work being done in the WHATWG.
+
+This is great news for everyone.
+A single body
+overseeing the standard.
+Finally.
+
+Now,
+let us say that you are
+an ordinary run of the mill developer
+and you want to propose some changes
+to the HTML specification.
+How do you do that?
+
+Well,
+six months ago,
+you would probably google
+something like
+"how to propose changes to the HTML standard"
+And the first hit you get might be to
+the W3C Process Document
+
+Which you would read
+for a few minutes
+and slowly feel the sanity
+draining from you
+as if cthulhu himself
+was sitting next to you
+eating pie
+and waiting for you to
+wither away.
+
+But if you were persistent
+you might eventually find
+something called the
+Web Platform Incubator Community Group
+or WICG
+which was formed in 2015
+to allow people
+to make proposals
+
+So you write up your idea
+and submit it to the WICG
+discourse group for discussion
+
+And then you wait
+And a few people read it
+and comment on it,
+and there's a tiny bit of discussion
+but nothing else happens
+
+And you begin to realize
+that the WICG Process
+really doesn't work
+
+And meanwhile,
+the aforementioned agreement comes down
+and you realize
+you need to get your proposal
+in front of WHATWG eyeballs.
+
+So you open a ticket there.
+and you write some articles
+and post to reddit,
+hacker news,
+and newsletters,
+twitter,
+etc.
+
+And this being the internet
+you get almost no feedback
+and you wonder what to do next.
+
+So you do the next thing
+and you take your idea on the road
+and you grab a coveted JSConf speaker slot
+and you tell a room half full
+of eager minds all about
+
+The Focus Traversal API
+A Focus Subsystem Proposal to the HTML Specification
+
+This proposal
+introduces the concepts
+of a Focus Traversal API
+o solve the two problems
+we discussed earlier:
+How to determine what is focusable
+and how to programmatically advance the focus
+
+This API exists
+as an additional set of behaviors
+over and above what can be done
+with the existing focus system.
+
+This proposal suggests
+creating a top level `window` property
+called `focusManager`
+which will be used to expose
+a series of properties and methods
+for working with Focus traversal.
+
+#### Focusable
+
+To address the complexity
+of determining if an element
+is focusable or not
+it is proposed
+to create `focusManager.isFocusable(element)`
+which will return true
+if the given element
+is able to receive the focus
+according to the Focus rules laid out
+in the HTML standard.
+
+#### Next/Previous Focus
+
+Moving the focus forward
+or backward is a key operation for developers
+and the Focus Traversal API
+seeks to ease this process
+with `focusManager.next(element)`
+and `focusManager.previous(element)`
+methods.
+These functions will return
+the next (or previous) element
+that meets the `focusManager.isFocusable()` condition,
+or null.
+
+#### Forward/Backward Focus Traversal
+
+A method to allow users
+to programmatically
+move the focus forward or backward
+without having to manually compute
+the next or previous focus
+is highly desirable.
+`focusManager.forward()` takes
+the currently focused element
+and computes the next element
+that meets the `focusManager.isFocusable()` condition,
+and advances the focus to that element
+using `element.focus()`.
+`focusManager.backward()` is similar
+but it computes the pervious element
+that meets the `focusManager.isFocusable()` condition
+and moves the focus to that element
+using `element.focus()`.
+
+#### Other Features
+
+As part of this proposal
+some additional conveiniences
+are offered
+in an attempt to centralize
+and organize the focus system.
+
+`window.focusManager.currentlyFocused` -
+Contains the element
+currently holding the focus,
+if any.
+
+`window.focusManager.previouslyFocused` -
+Contains the element
+that held the focus
+prior to the current focus,
+if any.
+
+`window.focusManager.history`
+An array of the last n
+historical focus holders.
+It is recommended this be capped
+at some number like 50 or 100
+to prevent unnecessary memory leakage.
+
+`window.focusManager.hasFocus(element)`
+Returns true
+if the given element currently
+has the focus.
+Functionally equivalent to
+`window.focusManager.currentlyFocused === element`.
+
+`window.focusManager.focus(element,focusOption)`
+Focus on the given element.
+Functionally the same as `element.focus()`.
+Returns void.
+
+`window.focusManager.orderedElements()`
+Returns an array
+of all focusable elements
+in the order that
+focus traversal would occur.
+Can take an optional container
+which would limit the results
+to just descendants
+of that container.
+
+So that's the Proposed
+Focus Traversal API.
+And like all good proposals
+there is a polyfill written
+for everyone to try out
+and to shim support
+until we can get actual implementation.
+
+Unfortunately though,
+actual implementation is a long
+long way away.
+
+However!
+You can help.
+
+We need people to
+comment on the proposal
+on the WICG or WHATWG
+(links in a minute)
+and get involved in
+the process.
+
+We need people to
+download the polyfill
+try it out
+find the bugs
+help grow the proposal.
+
+And we need people
+to spread the word.
+I'm going to live tweet a picture
+from this talk
+with the links
+and I need y'all
+to go retweet it
+and spread the word
+with us.
+
+<live tweet>
+
+And finally,
+if you are a browser implementor
+or have any sway with them
+come talk to me.
+And lets figure out how
+we can advance focus
+together!
