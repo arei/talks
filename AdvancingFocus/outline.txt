@@ -14,7 +14,28 @@ about focus
 by asking you to focus
 Clever huh?
 
+But I'm going to make it
+super easy
+for you all to focus
+on what I'm talking about
+with Kittens.
+Being focused.
+
+So buckle up,
+we are about to go
+on a kitten fueled
+dive into focus
+and ask the very important question
+what has focus done for you lately
+and can Glen,
+that's me,
+find 60 slides worth of kittens
+to keep you entertained.
+
+<pause>
+
 So...
+As I just said,
 
 My name is Glen.
 
@@ -22,22 +43,125 @@ And I want to talk to you
 about the browser focus subsystem.
 
 For most of us,
-browser focus just works.
+the browser focus Subsystem
+just works.
+
 I press TAB
 and focus increments.
 I press SHIFT-TAB
 and focus decrements.
 
+It works.
+
+But the question I am asking,
+the real reason I'm up here in front of you,
+is to ask,
+Does it work well?
+Does it meet the needs of the developers?
+Could it do more to be better?
+
 <pause>
+
+In order to answer
+these questions
+we need to know
+what exactly we are talking about
+and where it comes from, so...
+
+Very simply
+
+and glossing over a lot of details...
+
+Focus,
+as it relates to user interfaces,
+is the process
+by which the computer
+decides what part of the user interface
+receives any human interaction.
+A mouse click, a keystroke, etc.
+
+For example,
+
+when we press a key
+The keyboard reports to
+the operating system
+which determines what key was pressed.
+
+The operating system
+then determines where the user
+is currently targeting
+their input at...
+
+more precisely,
+which window,
+is the focus.
+Only one window
+can have the focus
+at any given time.
+
+If the browser
+is the current window focused,
+it tells the browser
+about the keyboard press.
+
+The browser then does
+exactly what the Operating system did
+and it determines which window or tab,
+is currently targeted
+to receive input,
+which is,
+in focus.
+Only one window or tab,
+can have the focus
+at any given time,
+
+Once the browser has determined
+which window or tab
+has the focus,
+it gets the associated top level DOM document
+for that window or tab.
+
+The top level DOM Document
+tracks which specific element
+in the DOM
+which is currently targeted
+to receive input.
+
+This is called the "activeElement".
+
+The key press is then
+translated into an event
+and the event is then fired
+with the activeElement
+as its target.
+
+<pause>
+
+The activeElement,
+together with the focus related events
+(focus, blur, focusin, focusout)
+and the element.focus() and the element.blur() function
+make up the focus subsystem.
+
+This is everything the browser
+programmatically gives us to understand focus
+and manipulate it.
+That's it.
+In its entirety.
+
+That's what we are talking about today.
+The focus subsystem.
+
+And unsurprisingly,
+the focus subsystem hasn't
+changed significantly
+in twenty years.
 
 The focus subsystem
 was first formally added
 to the Document Object Model Specification Level 1
-in January of 1998.
-
-and twenty years later,
-it is the same focus system
-we work with today.
+in January of 1998,
+with a few minor tweaks a few years later.
 
 And that's fine.
 It's a 20 year old API
@@ -45,16 +169,17 @@ and it does its job.
 
 Until it doesnt.
 
-Say we have a form
-with two fields
-a username and a password.
-And our client wants
-to advance the focus
-from the username field
-to the password field
-when the enter key is pressed
-and only if the username field
-has some content.
+Say you are me.
+
+And you need to write a web component
+that wraps a single field
+for entering a username.
+
+And your customer comes to you
+and says that the focus
+when you press ENTER
+should automatically advance
+to the next field.
 
 <aside>
 
@@ -62,38 +187,21 @@ I was recently telling someone
 about this scenario
 and they were shocked
 someone would want to
-advance focus on the enter key press
+advance focus on the ENTER keypress
 I was shocked that they were shocked.
 How had they never heard of this before?
 It was very eye opening
 for both of us
 to get the different perspective
 of the other.
+And we both learned
+a little something in the exchange
+and came away better people.
+
+So always be open
+to other points of view.
 
 </aside>
-
-Today we build this
-exactly the same way
-we did back then,
-albiet with slightly better syntax.
-
-```
-let userField = document.querySelector(".my-user-field");
-let passField = document.querySelector(".my-pass-field");
-userField.addEventListener("keyup",(event)>={
-	if (event.keyCode===13) {
-		passField.focus();
-	}
-});
-```
-
-And this is fine.
-Until we start to talk about Web Components.
-
-Say we want to do our same example
-but with each field as its own Web Component
-which wraps the INPUT tag.
-for whatever reason.
 
 So our code might look like this:
 (
@@ -114,7 +222,7 @@ ZephComponents.define("my-user-field",()=>{
 		</div>
 	`);
 
-	onEventAt("input","keyup",(el,shadow,event)=>{
+	onEventAt("input","keyup",(elment,content,event)=>{
 		if (event.keyCode===13) {
 
 			???????????????
@@ -153,10 +261,14 @@ What indicates something is focusable?
 And there are some easy answers
 
 If the element is an INPUT tag
+or SELECT tag
 or Link
 or BUTTON tag
+or contentEditable
 it can receive focus.
-Except if it is DISABLED
+
+Except!!!
+if it is DISABLED
 or has a tabindex attribute of negative one
 or is hidden
 or is within a fieldset that is DISABLED
@@ -201,7 +313,7 @@ Here's what it says about what is focusable
 And I dont know about you
 but I find this complicated
 and confusing
-as well.
+as hell.
 
 and honestly,
 I really dont want to write
@@ -250,14 +362,119 @@ is it enough?
 could it do more
 to make developers lives easier?
 
-Wouldn't it make sense
-if they could expose
-those two functions
+I say yes,
+it could do more
+it could be easier
+it could be more powerful
+
+And all of That
+begins
+with exposing
+three simple functions...
+
+First,
+a method to determine
+if something can receive the focus.
+I call this, isFocusable(e)
+
+Second and Third,
+methods to move the focus
+forward or backward
+regardless of where
+the focus currently is.
+I call these
+forward() and backward().
 
 And what other focus things
 could we expose
 or add
 to make focus better?
+
+What about a function
+to trap (aka limit)
+focus to a particular container?
+meaning focus would cycle
+within the focusable elements
+in that container,
+but never out of it
+until told otherwise.
+
+What about a programmatic way
+to order the focusable
+elements and enforce
+that order.
+
+Sure we have tabindex
+to do that
+but wouldn't a function
+that takes an array of the elements
+and does the ordering for us
+be really helpful?
+
+And there are other
+things that could really make
+focus more understandable.
+Lots more.
+
+a previousACtiveElement property
+or history array
+of what was previously focused
+could be nice.
+
+A programmatic way
+to set an element
+as the first element
+tpo get the focus
+once the page is loaded
+might be nice.
+
+And probably other things
+I haven't even considered.
+
+<pause>
+
+So naturally,
+when you have all these
+great ideas to add to browsers
+we write a new library
+and publish it
+to the INTERNET
+and everyone
+will instantly use it
+and throw flowers at my feet.
+
+I set out to do that
+about six months ago.
+
+I started with a library
+called "Tabbable"
+written by David Clark.
+// Tabbable from David Clark.
+// https://github.com/davidtheclark/tabbable
+
+Tabbable will return an array
+of all descendant nodes
+for a given node
+which meet its internal definition
+of what is a focusable element.
+
+So naturally,
+I "stole" its
+code for determining
+what is focusable.
+
+From there I added a global object
+to window
+called focusManager for housing
+my new focus functions.
+
+And about this time
+I started thinking
+why am I writing a library?
+why doesn't the browser
+just have these functions natively.
+And if not,
+is this something I could get changed?
 
 <pause>
 
@@ -323,6 +540,7 @@ or WICG
 which was formed in 2015
 to allow people
 to make proposals
+Wooohooo!
 
 So you write up your idea
 and submit it to the WICG
@@ -337,9 +555,21 @@ but nothing else happens
 And you begin to realize
 that the WICG Process
 really doesn't work
+or you worry
+that perhaps your idea
+is really garbage
+and that you are really garbage
 
-And meanwhile,
-the aforementioned agreement comes down
+Fortunately,
+we have alcohol to counteract
+that garbage pessimism
+and I drank a lot of it
+to do so.
+
+And while I was doing that,
+the aforementioned agreement
+between the W3C and WHATWG
+comes down
 and you realize
 you need to get your proposal
 in front of WHATWG eyeballs.
@@ -356,7 +586,8 @@ And this being the internet
 you get almost no feedback
 and you wonder what to do next.
 
-So you do the next thing
+So you do the next great thing
+you can think of
 and you take your idea on the road
 and you grab a coveted JSConf speaker slot
 and you tell a room half full
@@ -366,20 +597,25 @@ The Focus Traversal API
 A Focus Subsystem Proposal to the HTML Specification
 
 This proposal
-introduces the concepts
+formally introduces the concepts
 of a Focus Traversal API
 to solve the two problems
 we discussed earlier:
 How to determine what is focusable
-and how to programmatically advance the focus
+and how to programmatically
+increment/decrement the focus
 
 This API exists
 as an additional set of behaviors
 over and above what can be done
 with the existing focus system.
+Nothing about the existing
+focus subsystem changes,
+the proposal is purely addative.
 
-This proposal suggests
-creating a top level `window` property
+This proposal,
+built from my initial library work
+suggests creating a top level `window` property
 called `focusManager`
 which will be used to expose
 a series of properties and methods
@@ -481,25 +717,49 @@ Returns an array
 of all focusable elements
 in the order that
 focus traversal would occur.
-
-Can take an optional container
+It can take an optional container
 which would limit the results
 to just descendants
 of that container.
+
+trap()
+order()
+and auto()
+are all coming soon.
 
 <pause>
 
 So that's the Proposed
 Focus Traversal API.
-And like all good proposals
-there is a polyfill written
-for everyone to try out
-and to shim support
+
+I have submitted it to the WICG
+and the WHATWG
+and now I'm telling you all about it.
+
+I even fleshed out my
+original library around focus
+and made it a working polyfill
+that you can use today
+to shim all these
+cool and useful
+focus functions
+into your applications today
 until we can get actual implementation.
 
 Unfortunately though,
 actual implementation is a long
 long way away.
+
+The WHATWG process
+for enacting change
+requires you to
+convince browser manufacturers
+that your idea is worthy
+of their time.
+
+And I can count on zero hands
+the number of browser manufacturers
+I am able to talk to.
 
 However!
 You can help.
@@ -517,9 +777,17 @@ try it out
 find the bugs
 help grow the proposal.
 
-And we need people
+We need people to help
+come up with ideas,
+write tests,
+be involved!
+
+And we
+especially
+need people
 to spread the word.
 
+So,
 I'm going to live tweet a picture
 from this talk
 with the links
@@ -531,12 +799,12 @@ with us.
 <live tweet>
 
 And finally,
-if you are a browser implementor
+if you are a browser manufacturer
 or have any sway with them
 come talk to me.
-
 And lets figure out how
 we can advance focus
 together!
 
+That's all I have to say.
 Thanks for your focus.
