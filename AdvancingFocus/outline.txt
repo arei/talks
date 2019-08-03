@@ -1,75 +1,80 @@
 # Advancing Focus
 ---
 
-Greetings.
+Greetings everyone.
 
-If you could all focus on me.
+My name is Glen
+and I am here today
+to talk about
+THE MOST EXCITING PART
+of working with browsers
 
-<pause>
+<quick pause>
 
-Do you see what I just did there?
+A topic
+mind you
+that will LITERALLY
+make you shout with joy
+as we discuss
 
-I started a talk
-about focus
-by asking you to focus
-Clever huh?
+<quick pause>
 
-But I'm going to make it
-super easy
-for you all to focus
-on what I'm talking about
-with Kittens.
-Being focused.
+and I can tell you are
+all SUPER EAGER to hear about
+the stupendous
+amazing
+and totally riveting...
 
-So buckle up,
-we are about to go
-on a kitten fueled
-dive into focus
-and ask the very important question
-what has focus done for you lately
-and can Glen,
-that's me,
-find 60 slides worth of kittens
-to keep you entertained.
+Focus Subsystem!
+[Slide: WTF?!?]
+[Sound: Needle Scratch]
 
 <pause>
 
-So...
-As I just said,
+Alright,
+I know this isn't
+the most glamorous thing
+we could be discussing
 
-My name is Glen.
+but sometimes
+you have to get a little
+bit dirty
+down in the weeds
+and take a long hard look
+at the tools we are given
+as web developers
+and ask
+could it be better.
 
-And I want to talk to you
-about the browser focus subsystem.
+And that's what I want to do today
+with the Focus Subsystem...
 
-For most of us,
-the browser focus Subsystem
-just works.
+I am going to dig
+a little bit into focus
+what it is
+and how it works
+and ask is it doing
+enough for us
 
-I press TAB
-and focus increments.
-I press SHIFT-TAB
-and focus decrements.
-
-It works.
-
-But the question I am asking,
-the real reason I'm up here in front of you,
-is to ask,
 Does it work well?
-Does it meet the needs of the developers?
-Could it do more to be better?
+
+Does it meet
+the needs of the developers?
+
+Could it do more
+to be better?
 
 <pause>
 
+First,
 In order to answer
 these questions
 we need to know
 what exactly we are talking about
-and where it comes from, so...
+and where it comes from,
 
+So,
 Very simply
-
 and glossing over a lot of details...
 
 Focus,
@@ -80,7 +85,12 @@ decides what part of the user interface
 receives any human interaction.
 A mouse click, a keystroke, etc.
 
-For example,
+And for any given
+human interaction
+only one piece,
+only one field,
+can be the focus
+at any given time.
 
 when we press a key
 The keyboard reports to
@@ -95,9 +105,6 @@ their input at...
 more precisely,
 which window,
 is the focus.
-Only one window
-can have the focus
-at any given time.
 
 If the browser
 is the current window focused,
@@ -107,13 +114,11 @@ about the keyboard press.
 The browser then does
 exactly what the Operating system did
 and it determines which window or tab,
+within the browser,
 is currently targeted
 to receive input,
 which is,
 in focus.
-Only one window or tab,
-can have the focus
-at any given time,
 
 Once the browser has determined
 which window or tab
@@ -144,7 +149,8 @@ and the element.focus() and the element.blur() function
 make up the focus subsystem.
 
 This is everything the browser
-programmatically gives us to understand focus
+programmatically gives us
+to understand focus
 and manipulate it.
 That's it.
 In its entirety.
@@ -152,16 +158,16 @@ In its entirety.
 That's what we are talking about today.
 The focus subsystem.
 
-And unsurprisingly,
-the focus subsystem hasn't
-changed significantly
-in twenty years.
-
 The focus subsystem
 was first formally added
 to the Document Object Model Specification Level 1
 in January of 1998,
 with a few minor tweaks a few years later.
+
+And unsurprisingly,
+the focus subsystem hasn't
+changed significantly
+in about twenty years.
 
 And that's fine.
 It's a 20 year old API
@@ -169,7 +175,11 @@ and it does its job.
 
 Until it doesnt.
 
-Say you are me.
+Say you are
+an incredibly handsome
+web developer
+named glen.
+[Poeshn Slide]
 
 And you need to write a web component
 that wraps a single field
@@ -232,7 +242,7 @@ ZephComponents.define("my-user-field",()=>{
 });
 
 The problem is,
-that our my-user-field component
+that our my-user-field web component
 is entirely encapsulated
 and knows nothing about
 what is outside of it.
