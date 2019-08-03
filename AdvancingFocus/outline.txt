@@ -37,8 +37,7 @@ the most glamorous thing
 we could be discussing
 
 but sometimes
-you have to get a little
-bit dirty
+we have to get a little bit
 down in the weeds
 and take a long hard look
 at the tools we are given
@@ -129,7 +128,7 @@ for that window or tab.
 The top level DOM Document
 tracks which specific element
 in the DOM
-which is currently targeted
+that is currently targeted
 to receive input.
 
 This is called the "activeElement".
@@ -145,7 +144,7 @@ as its target.
 The activeElement,
 together with the focus related events
 (focus, blur, focusin, focusout)
-and the element.focus() and the element.blur() function
+and the element.focus() and the element.blur() functions
 make up the focus subsystem.
 
 This is everything the browser
@@ -157,6 +156,9 @@ In its entirety.
 
 That's what we are talking about today.
 The focus subsystem.
+These 7 pieces.
+
+<short pause>
 
 The focus subsystem
 was first formally added
@@ -167,7 +169,7 @@ with a few minor tweaks a few years later.
 And unsurprisingly,
 the focus subsystem hasn't
 changed significantly
-in about twenty years.
+since then.
 
 And that's fine.
 It's a 20 year old API
@@ -191,6 +193,8 @@ when you press ENTER
 should automatically advance
 to the next field.
 
+This is a pretty common request.
+
 <aside>
 
 I was recently telling someone
@@ -204,7 +208,8 @@ It was very eye opening
 for both of us
 to get the different perspective
 of the other.
-And we both learned
+And in the end
+we both learned
 a little something in the exchange
 and came away better people.
 
@@ -214,15 +219,17 @@ to other points of view.
 </aside>
 
 So our code might look like this:
-(
-	A note here...
-	I'm using ZephJS to define
-	the web component.
-	I find it simplifies
-	writing them.
-	You can check it out at
-	zephjs.com
-)
+
+A note here...
+I'm using ZephJS to define
+the web component.
+I find it simplifies
+writing them.
+You can check it out at
+zephjs.com
+
+Anyway
+here's our code
 
 import {ZephComponents,html,onEventAt} from "ZephJS";
 ZephComponents.define("my-user-field",()=>{
@@ -241,18 +248,38 @@ ZephComponents.define("my-user-field",()=>{
 	});
 });
 
-The problem is,
-that our my-user-field web component
-is entirely encapsulated
-and knows nothing about
-what is outside of it.
+<walk through the code>
 
+you will notice,
+that the code
+doesnt know what to do
+once the correct keyCode
+is determined.
+
+Normally,
+the code would just
+call element.focus()
+on the element
+it wants to advance the focus to
+
+But in this scenario
+that doesnt work.
+This is because of How
+web components are designed.
+they are intended to be
+completely encapsulated
+and know nothing about
+what exists outside of them
+
+This means
+using the current focus subsystem
 We have no easy way
 to just tell the focus
 to advance to the next place.
 
 Now,
 everyone in this room
+who is paying attention
 is probably thinking
 just walk the tree
 starting at your element
@@ -268,7 +295,8 @@ What makes an element
 able to receive focus?
 What indicates something is focusable?
 
-And there are some easy answers
+And there are some
+easy answers here
 
 If the element is an INPUT tag
 or SELECT tag
@@ -284,6 +312,11 @@ or is hidden
 or is within a fieldset that is DISABLED
 or is within a form that is DISABLED
 but not all the time.
+
+And what about
+if the element
+is not visible
+or otherwise inert?
 
 See, determining what is Focusable
 is really hard.
@@ -367,12 +400,12 @@ and we can direct it
 if we know exactly
 where to direct it.
 And this is okay...
-But is it good?
-is it enough?
-could it do more
-to make developers lives easier?
+but its not enough.
 
-I say yes,
+It's a twenty yearl old API
+and it is really
+starting to show its age.
+
 it could do more
 it could be easier
 it could be more powerful
@@ -395,7 +428,8 @@ the focus currently is.
 I call these
 forward() and backward().
 
-And what other focus things
+And consider
+what other focus things
 could we expose
 or add
 to make focus better?
@@ -413,7 +447,6 @@ What about a programmatic way
 to order the focusable
 elements and enforce
 that order.
-
 Sure we have tabindex
 to do that
 but wouldn't a function
@@ -426,7 +459,7 @@ things that could really make
 focus more understandable.
 Lots more.
 
-a previousACtiveElement property
+a previousActiveElement property
 or history array
 of what was previously focused
 could be nice.
@@ -434,7 +467,7 @@ could be nice.
 A programmatic way
 to set an element
 as the first element
-tpo get the focus
+to get the focus
 once the page is loaded
 might be nice.
 
@@ -451,7 +484,8 @@ and publish it
 to the INTERNET
 and everyone
 will instantly use it
-and throw flowers at my feet.
+and throw flowers at your feet
+and shower you with praise.
 
 I set out to do that
 about six months ago.
@@ -465,17 +499,19 @@ written by David Clark.
 Tabbable will return an array
 of all descendant nodes
 for a given node
-which meet its internal definition
+which meet Tabbables internal definition
 of what is a focusable element.
 
+I didnt want to try
+and write my own
+isFocusable() method,
 So naturally,
-I "stole" its
-code for determining
-what is focusable.
+I "stole" the one from Tabbable.
 
 From there I added a global object
 to window
-called focusManager for housing
+called focusManager
+for housing
 my new focus functions.
 
 And about this time
@@ -485,6 +521,9 @@ why doesn't the browser
 just have these functions natively.
 And if not,
 is this something I could get changed?
+
+surely, this something
+everyone would want!
 
 <pause>
 
@@ -519,7 +558,9 @@ Finally.
 
 Now,
 let us say that you are
-an ordinary run of the mill developer
+an incredibly handsome,
+but not super popular,
+web developer
 and you want to propose some changes
 to the HTML specification.
 How do you do that?
@@ -549,18 +590,22 @@ Web Platform Incubator Community Group
 or WICG
 which was formed in 2015
 to allow people
+like you and I
 to make proposals
 Wooohooo!
+Jackpot!
 
 So you write up your idea
 and submit it to the WICG
 discourse group for discussion
 
 And then you wait
-And a few people read it
-and comment on it,
+And like three people
+read it
+and one person comments on it,
 and there's a tiny bit of discussion
 but nothing else happens
+for months.
 
 And you begin to realize
 that the WICG Process
@@ -584,7 +629,8 @@ and you realize
 you need to get your proposal
 in front of WHATWG eyeballs.
 
-So you open a ticket there.
+So you open a ticket
+on the WHATWG github.
 and you write some articles
 and post to reddit,
 hacker news,
@@ -594,12 +640,24 @@ etc.
 
 And this being the internet
 you get almost no feedback
+except for people pooping
+on your idea
+because it has no value
+to them personally
+so it must not have value
+to anyone else.
+
+and you doubt yourself
+and you doubt your idea some more
 and you wonder what to do next.
 
-So you do the next great thing
-you can think of
-and you take your idea on the road
-and you grab a coveted JSConf speaker slot
+More alcohol.
+
+And then you have a greatest idea
+you ever had...
+
+you take your idea on the road;
+you grab a coveted JSConf speaker slot
 and you tell a room half full
 of eager minds all about
 
@@ -609,7 +667,7 @@ A Focus Subsystem Proposal to the HTML Specification
 This proposal
 formally introduces the concepts
 of a Focus Traversal API
-to solve the two problems
+to solve the three problems
 we discussed earlier:
 How to determine what is focusable
 and how to programmatically
@@ -617,7 +675,8 @@ increment/decrement the focus
 
 This API exists
 as an additional set of behaviors
-over and above what can be done
+over and above
+what can be done
 with the existing focus system.
 Nothing about the existing
 focus subsystem changes,
@@ -625,7 +684,8 @@ the proposal is purely addative.
 
 This proposal,
 built from my initial library work
-suggests creating a top level `window` property
+suggests creating
+a top level `window` property
 called `focusManager`
 which will be used to expose
 a series of properties and methods
