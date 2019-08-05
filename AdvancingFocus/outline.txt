@@ -5,7 +5,7 @@ Greetings everyone.
 
 My name is Glen
 and I am here today
-to talk about
+to talk to you about
 THE MOST EXCITING PART
 of working with browsers
 
@@ -15,7 +15,6 @@ A topic
 mind you
 that will LITERALLY
 make you shout with joy
-as we discuss
 
 <quick pause>
 
@@ -49,7 +48,8 @@ And that's what I want to do today
 with the Focus Subsystem...
 
 I am going to dig
-a little bit into focus
+a little bit
+into focus
 what it is
 and how it works
 and ask is it doing
@@ -115,9 +115,7 @@ exactly what the Operating system did
 and it determines which window or tab,
 within the browser,
 is currently targeted
-to receive input,
-which is,
-in focus.
+to receive input.
 
 Once the browser has determined
 which window or tab
@@ -139,6 +137,14 @@ and the event is then fired
 with the activeElement
 as its target.
 
+So we can see
+that focus
+is a series of decisions
+at every level.
+From the operating system level
+to the application level
+to the DOM level.
+
 <pause>
 
 The activeElement,
@@ -154,7 +160,7 @@ and manipulate it.
 That's it.
 In its entirety.
 
-That's what we are talking about today.
+And That's what we are talking about today.
 The focus subsystem.
 These 7 pieces.
 
@@ -164,7 +170,8 @@ The focus subsystem
 was first formally added
 to the Document Object Model Specification Level 1
 in January of 1998,
-with a few minor tweaks a few years later.
+with a few minor tweaks
+a few years later.
 
 And unsurprisingly,
 the focus subsystem hasn't
@@ -176,6 +183,8 @@ It's a 20 year old API
 and it does its job.
 
 Until it doesnt.
+
+<pause>
 
 Say you are
 an incredibly handsome
@@ -200,20 +209,21 @@ This is a pretty common request.
 I was recently telling someone
 about this scenario
 and they were shocked
-someone would want to
+that a customer would want to
 advance focus on the ENTER keypress
 I was shocked that they were shocked.
 How had they never heard of this before?
 It was very eye opening
-for both of us
+exchange for both of us
 to get the different perspective
 of the other.
 And in the end
 we both learned
-a little something in the exchange
+a little something
 and came away better people.
 
-So always be open
+So my little aside point
+is to always be open
 to other points of view.
 
 </aside>
@@ -223,13 +233,28 @@ So our code might look like this:
 A note here...
 I'm using ZephJS to define
 the web component.
+
+ZephJS is a super
+simple and tiny library
+for writing web components
+really easily.
+
 I find it simplifies
-writing them.
+writing them greatly.
 You can check it out at
 zephjs.com
 
 Anyway
-here's our code
+back to our story.
+
+We have a customer
+that wants a web component
+for entering a username
+they can re-use
+and it must advance the focus
+when ENTER is pressed.
+
+Here's our code
 
 import {ZephComponents,html,onEventAt} from "ZephJS";
 ZephComponents.define("my-user-field",()=>{
@@ -361,7 +386,11 @@ as hell.
 and honestly,
 I really dont want to write
 a method that tries
-to figure this out.
+to figure this out
+becuase,
+lets face it,
+I am almost certainly
+going to get it wrong.
 
 <pause>
 
@@ -370,6 +399,7 @@ So we essentially have two problems
 we have no easy way
 to advance the focus
 automatically.
+(Or decrement the focus automatically)
 
 and we have no easy way
 to determine what can receive focus,
@@ -391,6 +421,8 @@ and they have a means
 to advance the focus to
 the next focusable element.
 
+<quick pause>
+
 The focus subsystem today,
 is mostly a passive thing.
 we can read it,
@@ -402,7 +434,7 @@ where to direct it.
 And this is okay...
 but its not enough.
 
-It's a twenty yearl old API
+It's a twenty year old API
 and it is really
 starting to show its age.
 
@@ -516,7 +548,7 @@ my new focus functions.
 
 And about this time
 I started thinking
-why am I writing a library?
+why am *I* writing a library?
 why doesn't the browser
 just have these functions natively.
 And if not,
@@ -535,6 +567,7 @@ First, as most of you may be aware
 there are two separate
 governing bodies
 maintaining the HTML standard
+at the same time.
 The W3C
 and the WHATWG
 
@@ -549,12 +582,14 @@ both the W3C and WHATWG
 signed an agreement
 to work together
 with the HTML Specification
-work being done in the WHATWG.
+work being done
+entirely in the WHATWG.
 
 This is great news for everyone.
-A single body
+we finally have a single body
 overseeing the HTML standard.
-Finally.
+
+<quick pause>
 
 Now,
 let us say that you are
@@ -575,9 +610,12 @@ the W3C Process Document
 
 Which you would read
 for a few minutes
-and slowly feel the sanity
+<slowly>
+and slowly
+feel the sanity
 draining from you
-as if cthulhu himself
+as if cthulhu
+himself
 was sitting next to you
 eating pie
 and waiting for you to
@@ -608,26 +646,33 @@ but nothing else happens
 for months.
 
 And you begin to realize
-that the WICG Process
+that the either
+the WICG Process
 really doesn't work
-or you worry
+
+or
+
 that perhaps your idea
 is really garbage
-and that you are really garbage
+and that you
+are really garbage.
+
+Thus begins
+the spiral of
+internet self doubt.
 
 Fortunately,
-we have alcohol to counteract
-that garbage pessimism
-and I drank a lot of it
-to do so.
-
-And while I was doing that,
+as the doubt was
+just getting going
 the aforementioned agreement
 between the W3C and WHATWG
 comes down
 and you realize
 you need to get your proposal
-in front of WHATWG eyeballs.
+in front of WHATWG eyeballs,
+Not the WICG eyeballs,
+and honestly,
+more eyeballs everywhere.
 
 So you open a ticket
 on the WHATWG github.
@@ -647,18 +692,16 @@ to them personally
 so it must not have value
 to anyone else.
 
-and you doubt yourself
-and you doubt your idea some more
+and again you doubt yourself
+and again you doubt your idea
 and you wonder what to do next.
 
-More alcohol.
-
-And then you have a greatest idea
+And then you have a greatest inspiration
 you ever had...
 
 you take your idea on the road;
 you grab a coveted JSConf speaker slot
-and you tell a room half full
+and you tell a room full
 of eager minds all about
 
 The Focus Traversal API
@@ -669,6 +712,7 @@ formally introduces the concepts
 of a Focus Traversal API
 to solve the three problems
 we discussed earlier:
+
 How to determine what is focusable
 and how to programmatically
 increment/decrement the focus
@@ -717,7 +761,7 @@ methods.
 
 These functions will return
 the next (or previous) element
-that meets the `focusManager.isFocusable()` condition,
+that meets the `isFocusable()` condition,
 or null.
 
 This only indicates which element
@@ -729,16 +773,16 @@ For that we turn to...
 
 #### Forward/Backward Focus Traversal
 
-`focusManager.forward()` takes
+`forward()` takes
 the currently focused element
 and computes the next element
-that meets the `focusManager.isFocusable()` condition,
+that meets the `isFocusable()` condition,
 and advances the focus to that element
 using `element.focus()`.
 
-`focusManager.backward()` is similar
+`backward()` is similar
 but it computes the pervious element
-that meets the `focusManager.isFocusable()` condition
+that meets the `isFocusable()` condition
 and moves the focus to that element
 using `element.focus()`.
 
@@ -750,39 +794,38 @@ are offered
 in an attempt to centralize
 and organize the focus system.
 
-`window.focusManager.currentlyFocused` -
+`focusManager.currentlyFocused` -
 Contains the element
 currently holding the focus,
 if any.
 Functionally the same as
 `document.activeElement`.
 
-`window.focusManager.previouslyFocused` -
+`focusManager.previouslyFocused` -
 Contains the element
 that held the focus
 prior to the current focus,
 if any.
 
-`window.focusManager.history`
-An array of the last n
+`focusManager.history`
+returns an array of the last n
 historical focus holders.
 It is recommended this be capped
 at some number like 50 or 100
 to prevent unnecessary memory leakage.
 
-`window.focusManager.hasFocus(element)`
+`focusManager.hasFocus(element)`
 Returns true
 if the given element currently
 has the focus.
 Functionally equivalent to
-`window.focusManager.currentlyFocused === element`.
+`focusManager.currentlyFocused === element`.
 
-`window.focusManager.focus(element,focusOption)`
+`focusManager.focus(element,focusOption)`
 Focus on the given element.
 Functionally the same as `element.focus()`.
-Returns void.
 
-`window.focusManager.orderedElements()`
+`focusManager.orderedElements()`
 Returns an array
 of all focusable elements
 in the order that
@@ -795,7 +838,9 @@ of that container.
 trap()
 order()
 and auto()
-are all coming soon.
+which I mentioned earlier
+are also all coming soon
+to the proposal.
 
 <pause>
 
@@ -804,17 +849,20 @@ Focus Traversal API.
 
 I have submitted it to the WICG
 and the WHATWG
+as I told you
 and now I'm telling you all about it.
 
 I even fleshed out my
 original library around focus
 and made it a working polyfill
+for the proposal
 that you can use today
 to shim all these
 cool and useful
 focus functions
-into your applications today
-until we can get actual implementation.
+into your applications
+until we can get actual implementation
+in the browsers.
 
 Unfortunately though,
 actual implementation is a long
@@ -824,6 +872,7 @@ The WHATWG process
 for enacting change
 requires you to
 convince browser manufacturers
+on your own
 that your idea is worthy
 of their time.
 
@@ -832,6 +881,7 @@ the number of browser manufacturers
 I am able to talk to.
 
 However!
+this is where I hope
 You can help.
 
 We need people to
