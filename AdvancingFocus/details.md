@@ -5,21 +5,20 @@
 Some things in web development just work; they do what they are supposed to do day in and day out, and we don't ever have to worry about them. It's the "little engine that could" story: it's reliable, it stable, it's trustworthy. The Focus subsystem is one such system... reliable, stable, trustworthy, but is it good... does it meet the needs of modern web development? This talk delves into the Focus subsystem for Web Browsers and asks us to consider is there more it could be doing and how do we make it happen?
 
 #### Presentation History
+* CharmCityJS
+  - August 7, 2019 @ 7pm (EDT)
+  - By Glen R. Goodwin
+
+
 * JSConf US
   - August 12, 2019 @ 2:15pm (PDT)
   - By Glen R. Goodwin
   - Recording Coming Soon
 
-<!--
 #### Slides
 
- - In Powerpoint Format: [IntroZephjS.pptx](https://github.com/arei/talks/raw/master/IntroZephjS/IntroZephjS.pptx)
- - In Adobe PDF Format: [IntroZephjS.pdf](https://github.com/arei/talks/raw/master/IntroZephjS/IntroZephjS.pdf)
-
-#### Example code
- - [Rating Stars Example](https://github.com/arei/talks/tree/master/IntroZephJS/example)
-
--->
+ - In Powerpoint Format: [AdvancingFocus.pptx](https://github.com/arei/talks/raw/master/AdvancingFocus/AdvancingFocus.pptx)
+ <!-- - In Adobe PDF Format: [IntroZephjS.pdf](https://github.com/arei/talks/raw/master/IntroZephjS/IntroZephjS.pdf) -->
 
 #### License
 
