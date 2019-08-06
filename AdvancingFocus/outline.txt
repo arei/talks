@@ -187,7 +187,7 @@ Until it doesnt.
 <pause>
 
 Say you are
-an incredibly handsome
+an incredibly dashing
 web developer
 named glen.
 [Poeshn Slide]
@@ -203,30 +203,6 @@ should automatically advance
 to the next field.
 
 This is a pretty common request.
-
-<aside>
-
-I was recently telling someone
-about this scenario
-and they were shocked
-that a customer would want to
-advance focus on the ENTER keypress
-I was shocked that they were shocked.
-How had they never heard of this before?
-It was very eye opening
-exchange for both of us
-to get the different perspective
-of the other.
-And in the end
-we both learned
-a little something
-and came away better people.
-
-So my little aside point
-is to always be open
-to other points of view.
-
-</aside>
 
 So our code might look like this:
 
