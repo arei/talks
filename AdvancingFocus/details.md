@@ -18,7 +18,7 @@ Some things in web development just work; they do what they are supposed to do d
 #### Slides
 
  - In Powerpoint Format: [AdvancingFocus.pptx](https://github.com/arei/talks/raw/master/AdvancingFocus/AdvancingFocus.pptx)
- <!-- - In Adobe PDF Format: [IntroZephjS.pdf](https://github.com/arei/talks/raw/master/IntroZephjS/IntroZephjS.pdf) -->
+ - In Adobe PDF Format: [AdvancingFocus.pdf](https://github.com/arei/talks/raw/master/AdvancingFocus/ADvancingFocus.pdf)
 
 #### License
 
