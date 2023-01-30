@@ -7,7 +7,7 @@ OUTLINE
 	You have probably seen a job posting like this one...
 
 		Junior Software Engineer 
-		as Aperture Science
+		at Aperture Science
 
 		Aperture Science is a scientific research company founded by Cave Johnson working with cutting edge AI technologies that will help power the future of all humanity.
 
@@ -20,7 +20,7 @@ OUTLINE
 	Or like this one
 
 		Mid-Level Software Engineer 
-		as Aperture Science
+		at Aperture Science
 
 		Aperture Science is a scientific research company founded by Cave Johnson working with cutting edge AI technologies that will help power the future of all humanity.
 
@@ -33,7 +33,7 @@ OUTLINE
 	Or like this one
 
 		Senior Software Engineer 
-		as Aperture Science
+		at Aperture Science
 
 		Aperture Science is a scientific research company founded by Cave Johnson working with cutting edge AI technologies that will help power the future of all humanity.
 
@@ -46,7 +46,7 @@ OUTLINE
 	Or like this one
 
 		Principal Software Engineer 
-		as Aperture Science
+		at Aperture Science
 
 		Aperture Science is a scientific research company founded by Cave Johnson working with cutting edge AI technologies that will help power the future of all humanity.
 
@@ -59,7 +59,7 @@ OUTLINE
 	Or like this one
 
 		Lead Software Engineer 
-		as Aperture Science
+		at Aperture Science
 
 		Aperture Science is a scientific research company founded by Cave Johnson working with cutting edge AI technologies that will help power the future of all humanity.
 
@@ -80,57 +80,32 @@ OUTLINE
 	Its like assuming someone would be good at a job
 	because their last name has 10 characters in it.
 
-	So, why do companies do this?
-	Why do we use "years of experience"
-	as a yard stick for skill?
-
-10	Anyone want to take a guess
-	at the magic answer I'm thinking of in my head?
-
-	HR
-
-	See, a company is a collection of employees
-	All working toward a common goal.
-	But each employee is vastly different.
-	They are their own individuals.
-	With their own strengths and weakness.
-	And their own skills and talents.
-
-	But managing individuals is really hard
-	And taking the time to care aboutt people individually
-	is a lot of work.
-
-	So HR doesnt do that.
-	Instead they bucket people.
+	Companies do this 
+	because they need to put people into buckets.
+	Buckets make it easier to rationalize about people
+	Buckets make it so HR doesnt have to think as much.
 	
-	They bucket the employees into groups.
-	These people are all sales, so they go over here.
-	These people are all finance, so they go over here.
-	These people are all software engineer, so they go over here.
+	Buckets are lazy.
+	Buckets completely misses the point.
+	A company is not a collection of robots.
+	Its a collection of individuals
+	with different strengths and weaknesses.
+	And being individuals is a good thing.
 
-	And then they apply rules against those buckets.
-	This lets HR deal with all the differences in employees
-	while doing the least amount of work possible.
-	
-	But its completely misses the point
-	of hiring individuals
-	and playing to the strengths and weaknesses
-	of those individuals.
-
-	In software engineering
-	One of the key buckets HR uses is your "level".
-	Are you a Junior?
-	Or a Mid?
-	Or a Senior?
-	Or a Princiapl?
+	But companies still dont seem to understand this.
+	So they bucket us, sort us into groups.
+	And that's what "Years of Experience" is.
+	It's a bucket.
+	So that HR doesnt have to think about people.
+	They can just think about the buckets.
 
 	These buckets help HR determine your worth to the company.
 	How much they should pay you?
 	How much responsibility they can place in you?
-	How much thet can expect of you?
+	How much can they expect of you?
 	How much value do you add to the company?
 
-20	But circling back to the Job Descriptions I brought up earlier...
+	But circling back to the Job Descriptions I brought up earlier...
 	These buckets dont actually answer any of these questions.
 	They only answer one question:
 	How long have you been sitting at your desk.
@@ -146,19 +121,13 @@ OUTLINE
 	So lets blow it up.
 	Let us throw out the notion of "Years of Experience".
 	Let us instead imagine a better way to judge
-	a Software Engineers "level".
+	a Software Engineer's "level".
+	And once we understand the level
+	Then we can understand how to advance within it.
 
 	But before we can do that
 	We need to sidetrack into motivations.
-	What motiviations drive Software Engineers to work.
-	And how do those motiviations drive their job search?
-	
-	This is going to be just the top items, 
-	not every little thing. 
-	Also, I'm generalizing here. 
-	Everyone is different.
-	I just said that like two minutes ago.
-	Deal with it.
+	What motivations drive Software Engineers to work.
 
 	1. Getting Paid
 	Lets face it, we work to get paid.
@@ -170,7 +139,7 @@ OUTLINE
 	
 	2. Technical Challenge
 	People in software like to solve problems.
-	And there is nothing like overcoming a juice problem.
+	And there is nothing like overcoming a juicy problem.
 	So we want to be challenged. 
 	But not overwhelmed. 
 	Something in the sweet spot that forces us to grow
@@ -179,8 +148,8 @@ OUTLINE
 	3. Creative Opportunity
 	Software is as much an art as it is a science.
 	As such, there is a strong component of Creation in the work that we do.
-	Yet must companies already have the "plan" all mapped out.
-	And they chance to be creative is very micro-ized.
+	Yet most companies already have the "plan" all mapped out.
+	And the chance to be creative is very micro-ized.
 	Thus as we grow in our career we seek out greater opportunites
 	to be in a role that allows great chance to be creative.
 
@@ -194,18 +163,18 @@ OUTLINE
 	But there are a lot of ways to influence
 	without being the boss or acting bossy.
 
-30	5. Avoiding Hassle
+	5. Avoiding Hassle
 	Nobody wants to work in a company that sucks.
 	And nobody wants to go to that stupid 
 	weekly all hands meeting every friday morning.
 	So whether or not we choose to admit it
-	One of our underlying motiviations
+	One of our underlying motivations
 	Is to avoid work place stress...
 	Aka avoid hassle.
 
 	So these are 
 	In my opinion 
-	The motiviations that we
+	The motivations that we
 	as software engineers
 	look for in our work.
 
@@ -236,8 +205,8 @@ OUTLINE
 	It is when these number drop down to 1s and 2s
 	that people leave.
 
-	So now that we have some baselines for motiviations
-	we can look at how those motiviations translate to levels.
+	So now that we have some baselines for motivations
+	we can look at how those motivations translate to levels.
 
 	For a Junior we'd expect...
 	Low Pay
@@ -255,26 +224,13 @@ OUTLINE
 	Low Influence
 	Low Avoiding Hassle
 	
-	For a Seniors...
-	Medium Pay
-	Moderate Challenge
-	Medium Creativity
-	Medium Influence
-	Medium Avoiding Hassle
-
-40	For a Principal...
-	High Pay
-	High Challenge
-	High Creativity
-	Medium Influence
-	Low Avoiding Hassle
+	And so on...
 
 	These, of course, fluxuate from job to job,
 	but generally you get the idea.
-
 	So these are our software levels.
 
-	And to take it back to the HR buckets.
+	And to take it back to the Job Descriptions.
 	These are the "Years of Experience" expectations
 	that correspond to these roles
 	Junior ...... 1 to 2 years
@@ -299,6 +255,7 @@ OUTLINE
 	I guess he's a Senior Software Engineer now. 
 	Better give him more money 
 	and more influence in the company."
+	Just doesnt work that way.
 
 	So you see, 
 	"Years of Experience" 
@@ -310,13 +267,13 @@ OUTLINE
 	<PAUSE>
 
 	Alright,
-	So I am 50 slides or so in.
+	So I am 30 slides or so in.
 	And All I've done is bitch about HR.
 	And I promise I was going to talk about
 	how you, as a software engineer,
 	level-up your carreer.
 	
-50	If the magic "Years of Experience" number is worthless
+	If the magic "Years of Experience" number is worthless
 	for you to level up your career by,
 	what do you use instead?
 
@@ -371,14 +328,7 @@ OUTLINE
 	These 5 Growth Channels
 	are how you scale.
 
-	To be clear
-	I'm not saying 
-	Growing in any one of these channels
-	Alone is going to get your promoted
-
-60	But it will make you a more valuable employee.
-	It will make you a more valuable job candidate.
-	It will make you a more successful engineer.
+	
 
 	Cool. 
 	But how do I grow in these areas?
@@ -415,65 +365,6 @@ OUTLINE
 		- Give Talks.
 		- Make small talk.
 
-	So that's it.
-	That's my advice to Scaling you
-	and advancing to the next level.
-	
-	But before I leave you
-	A couple of other small things
-	I have learned over a very long career
-	that I think can help you out.
-
-	1. Change jobs
-	There is no disputing the math here.
-	Stay in your current job, get a 3% raise.
-	Change jobs, get a 10% raise.
-	Yes, I do understand a job is more than just money.
-	And the other 4 motivations we discussed illustrate that.
-	But money is a big part of that.
-	My advice for new people starting their career is always the same.
-	Stay in your first job for 2 years, then switch every 1 to 3 years after that.
-	Sure you will get some bad jobs along the way
-	So you just move on.
-
-70	2. Dont Coast
-	I see so many software engineer coasting. 
-	They just do their job, collect their pay check, go home and watch TV.
-	That's fine, but they are actively choosing to not grow.
-
-	3. Scope of work
-	As you grow in your career
-	you will be tasked with projects that
-	are increasingly larger in scope.
-	At the Junior level your scope is very small, the file/class/function scope.
-	At the Mid level it expands, the folder level; a collection of classes, a feature.
-	At the senior level is expands again, the system level; how a large system works all together.
-	At the principal level you are usually at the product level; how does the entire product work together.
-	Beyond principal, you are generally working at the company level; how do all the products work together.
-
-	4. Advocate for Yourself
-	Nobody is going to toot your horn for you.
-	You must be your own marketing department.
-	Make sure that when you do something you think
-	is clever or cool or exciting
-	that you share it with your leadership
-	and your peers.
-
-	5. Speak Up
-	You dont have to be the loudest person in the meeting
-	But you should always be part of the meeting.
-	Even if its only to ask a question 
-	or to echo someone else point.
-	Being queit is not doing you any favors.
-	And I know it sometimes can be very hard to speak up
-	when there are a lot of other loud people never yielding the floor.
-	Find a way. Raise you fucking hand if you have to.
-
-	6. Encourage Others
-	Always encourage your peers, your boss, your employees.
-	If someone says something you agree with, echo and give credit.
-	Raise people up around you.
-
 	Alright.
 	I've given you a lot of advice here.
 	Take it or not.
@@ -483,6 +374,15 @@ OUTLINE
 	And everything I have talked about tonight
 	Has served me exceptionally well in my career.
 	Hopefully it will serve you as well.
+
+	To be clear
+	I'm not saying 
+	Growing in any one of these channels
+	Alone is going to get your promoted
+
+	But it will make you a more valuable employee.
+	It will make you a more valuable job candidate.
+	It will make you a more successful engineer.
 	
 	I'm not saying it wont be easy.
 	I'm not saying it wont have problems.
@@ -491,4 +391,4 @@ OUTLINE
 	you've been working for 5 years
 	and are suddenly ready for more pay and responsibility.
 
-77	Thank you.
+	Thank you.
