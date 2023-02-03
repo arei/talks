@@ -5,19 +5,15 @@
 The software industry ranks the various levels of a software engineer, from Junior to Mid to Senior to Principal to Lead, usually in terms of years of experience. But that does not really do the differences between these roles justice does it. This talk will throw out the idea of "years of experience" as a distinguisher in engineer career levels and instead suplant them with the ideas of scale of work, knowledge, leadership, and communication. Join me as I tell you the real secret of moving up in your company and increasing your value.
 
 #### Presentation History
-<!--
+
 * CharmCityJS
   - Feb 1, 2023 @ 7:30pm (EDT)
   - By Glen R. Goodwin
-  - Recording at 
 
 #### Slides
 
- - In Powerpoint Format: [IntroZephjS.pptx](https://github.com/arei/talks/raw/master/IntroZephjS/IntroZephjS.pptx)
- - In Adobe PDF Format: [IntroZephjS.pdf](https://github.com/arei/talks/raw/master/IntroZephjS/IntroZephjS.pdf)
-
-#### Example code
- - [Rating Stars Example](https://github.com/arei/talks/tree/master/IntroZephJS/example) -->
+ - In Powerpoint Format: [IntroZephjS.pptx](https://github.com/arei/talks/raw/master/ScaleYou/ScaleYou.pptx)
+ - In Adobe PDF Format: [IntroZephjS.pdf](https://github.com/arei/talks/raw/master/ScaleYou/ScaleYou.pdf)
 
 #### License
 
