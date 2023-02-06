@@ -12,8 +12,8 @@ The software industry ranks the various levels of a software engineer, from Juni
 
 #### Slides
 
- - In Powerpoint Format: [IntroZephjS.pptx](https://github.com/arei/talks/raw/master/ScaleYou/ScaleYou.pptx)
- - In Adobe PDF Format: [IntroZephjS.pdf](https://github.com/arei/talks/raw/master/ScaleYou/ScaleYou.pdf)
+ - In Powerpoint Format: [ScaleYou.pptx](https://github.com/arei/talks/raw/master/ScaleYou/ScaleYou.pptx)
+ - In Adobe PDF Format: [ScaleYou.pdf](https://github.com/arei/talks/raw/master/ScaleYou/ScaleYou.pdf)
 
 #### License
 
